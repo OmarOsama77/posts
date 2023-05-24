@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/register_view_model.dart';
+import '../../providers/register_view_model.dart';
 
 class Signup extends StatelessWidget {
     Signup({Key? key}) : super(key: key);
@@ -70,6 +70,7 @@ class Signup extends StatelessWidget {
                   ),
                   SizedBox(height: 20,),
                   TextFormField(
+                    controller: password,
                     validator: (val){
                       if(val!.isEmpty||val.length<=7){
                         return "Required";
@@ -84,6 +85,7 @@ class Signup extends StatelessWidget {
                   ),
                   SizedBox(height: 20,),
                   TextFormField(
+                    controller: confirmPass,
                     validator: (val){
                       if(val!.isEmpty||val.length<=7){
                         return "Required";
@@ -106,11 +108,7 @@ class Signup extends StatelessWidget {
                           child: Consumer<RegisterViewModel>(
                               builder: (_,viewModel, __){
                             return ElevatedButton(onPressed: (){
-                                 if(viewModel.checkPasswordVal(password.text, confirmPass.text)){
-                                   print("Succes");
-                                 }else{
-                                   print("Error");
-                                 }
+
                             }, child: const Text("Register"),
                               style: ButtonStyle(
                                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -123,7 +121,7 @@ class Signup extends StatelessWidget {
                         ),
                         const SizedBox(height: 10,),
                         TextButton(onPressed: (){
-                          Navigator.pushNamed(context, "/");
+                          Navigator.pushReplacementNamed(context, "/");
                         }, child:const  Text("Already have an account"))
                       ],
                     ),

@@ -66,15 +66,13 @@ class Login extends StatelessWidget {
                     ),
                     const    SizedBox(height: 15,),
                      Container(width: double.infinity,
-                       child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+                       child: Column(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.end,
                          children: [
                            SizedBox(
                              height: 50,
                               width: 350,
                              child: ElevatedButton(onPressed: (){
-                               if(myKey.currentState!.validate()){
-
-                               }
+                                Navigator.pushReplacementNamed(context, "/bottom_navigation_bar");
                              }, child: const Text("Login"),
                              style: ButtonStyle(
                                shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -85,7 +83,7 @@ class Login extends StatelessWidget {
                            ),
                            const SizedBox(height: 10,),
                            TextButton(onPressed: (){
-                             Navigator.pushNamed(context, "/signup");
+                             Navigator.pushReplacementNamed(context, "/signup");
                            }, child:const  Text("Register"))
                          ],
                        ),
