@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:posts/providers/bottom_nav_bar_provider.dart';
 import 'package:posts/providers/register_view_model.dart';
+import 'package:posts/providers/settings_provider.dart';
 import 'package:posts/screens/home.dart';
 import 'package:posts/screens/authentication_screens/login.dart';
 import 'package:posts/screens/navigation/bottom_navigation_bar.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create:(_)=>RegisterViewModel()),
         ChangeNotifierProvider(create:(_)=>NavigationProvider()),
+        ChangeNotifierProvider(create:(_)=>SettingViewModel()),
       ],
       child: MaterialApp(
           initialRoute: '/',

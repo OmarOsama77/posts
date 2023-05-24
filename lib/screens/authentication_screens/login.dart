@@ -12,58 +12,65 @@ class Login extends StatelessWidget {
     final screenw = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Container(
+        body: 
+        Container(
           padding: EdgeInsets.only(top: 25, left: 0, right: 0),
           width: screenw,
           height: screenh,
-          child: Column(
-            children: [
-              Image.asset("images/login3.png",),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Login",
-                      style: TextStyle(
-                          fontSize: 30, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 25, right: 25, top: 15),
-                child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextFormField(
-
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.email), hintText: "Email"),
+          child: 
+            Column(
+               children: [
+                  Column(mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                         Image.asset("images/login3.png")
+                    ],
+            ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left:25),
+                    child: Row(
+                      children: [
+                        Text("Login",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
+                      ],
                     ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    TextFormField(
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:30,right: 30,top: 20),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                  
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.email), hintText: "Email"),
+                      ),
+                      SizedBox(height: 25,),
+                      TextFormField(
 
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.lock), hintText: "Password"),
                     ),
-                    Row(mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                       TextButton(onPressed: (){}, child: Text("Forgot passsword ?"))
                       ],
-                    )
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right:30),
+                child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                   TextButton(onPressed: (){}, child: Text("Forgot Password ?"))
                   ],
                 ),
               ),
-              Expanded(
-                  child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
+              SizedBox(height: 20,),
+              Expanded(child: Center(
+                child: Column(
+                  children: [
+                    SizedBox(
                     height: 50,
                     width: 350,
                     child: ElevatedButton(
@@ -78,14 +85,14 @@ class Login extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15)))),
                     ),
                   ),
-                  const SizedBox(height: 10,),
                   TextButton(onPressed: (){
                     Navigator.pushReplacementNamed(context, "/signup");
                   }, child:const  Text("Register"))
-                ],
+                  ],
+                ),
               ))
-            ],
-          ),
+          ],
+         )
         ));
   }
 }

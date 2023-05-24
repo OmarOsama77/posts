@@ -16,14 +16,15 @@ class AddPost extends StatelessWidget {
          child: Column(
            children: [
               Text("Create Post",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-             Row(
+             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: [
                  CircleAvatar(
                    radius: 30,
                    backgroundImage: AssetImage("images/ronaldo.jpg"),
                  ),
-                 SizedBox(width: 20,),
-                 Text("Cristiano Ronaldo")
+                
+                 Text("Cristiano Ronaldo"),
+                       IconButton(onPressed: (){}, icon: Icon(Icons.browse_gallery_sharp))
                ],
              ),
 
@@ -39,18 +40,43 @@ class AddPost extends StatelessWidget {
                        )
                      ),
                    ),
-                   Container(
-                     width: 250,
-                     height: 250,
-                     decoration: BoxDecoration(
-                       border: Border.all(
-                         color: Colors.black,
-                       ),
-                     ),
-                   )
+                   SizedBox(height: 30,),
+              
+
+
+
+
+                  //  Container(
+                  //    width: 280,
+                  //    height: 150,
+                  //    decoration: BoxDecoration(
+                  //      border: Border.all(
+                  //        color: Colors.black,
+                  //      ),
+                  //    ),
+                  //    child:Center(child: Text("Add Image"),),
+                  //  )
                  ],
                ),
-             )
+             ),
+             SizedBox(height: 25,),
+              Center(
+                child:SizedBox(
+                    height: 50,
+                    width: 200,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                            context, "/bottom_navigation_bar");
+                      },
+                      child: const Text("Post"),
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)))),
+                    ),
+                  ),
+              )
            ],
          ),
        ),
