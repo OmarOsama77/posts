@@ -10,126 +10,120 @@ class Signup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myKey = GlobalKey<FormState>();
+    final screenh = MediaQuery.of(context).size.height;
+    final screenw = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Form(
-          key: myKey,
-            child:Container(
-              padding: const EdgeInsets.only(top: 20,right: 20,left:20),
-             width: double.infinity,
-              child: Column(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Container(
-                      width: 300,
-                      height: 250,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage("images/register.png"))
-                      ),
-                    ),
-                  ),
-                  Text("Register",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-                  SizedBox(height: 20,),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      hintText: "First Name"
-                    ),
-                    validator: (val){
-                      if(val!.isEmpty||val.length<2){
-                        return "Required";
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 20,),
-                  TextFormField(
-                    validator: (val){
-                      if(val!.isEmpty||val.length<2){
-                        return "Required";
-                      }
-                      return null;
-                    },
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                        hintText: "Second Name"
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  TextFormField(
-                    validator: (val){
-                      if(val!.isEmpty||!val.contains('@')||val.length<=5){
-                        return "Required";
-                      }
-                      return null;
-                    },
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                        hintText: "Email"
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  TextFormField(
-                    controller: password,
-                    validator: (val){
-                      if(val!.isEmpty||val.length<=7){
-                        return "Required";
-                      }
-                      return null;
-                    },
-                    obscureText: false,
-                    keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
-                        hintText: "Password"
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  TextFormField(
-                    controller: confirmPass,
-                    validator: (val){
-                      if(val!.isEmpty||val.length<=7){
-                        return "Required";
-                      }
-                      return null;
-                    },
-                    obscureText: false,
-                    keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
-                        hintText: "Confirm Password"
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Container(width: double.infinity,
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 50,
-                          width: 350,
-                          child: Consumer<RegisterViewModel>(
-                              builder: (_,viewModel, __){
-                            return ElevatedButton(onPressed: (){
-
-                            }, child: const Text("Register"),
-                              style: ButtonStyle(
-                                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)
-                                  ))
-                              ),
-                            );
-                              }
-                          ),
-                        ),
-                        const SizedBox(height: 10,),
-                        TextButton(onPressed: (){
-                          Navigator.pushReplacementNamed(context, "/");
-                        }, child:const  Text("Already have an account"))
-                      ],
-                    ),
-                  )
-                ],
+    body: Container(
+      padding: EdgeInsets.only(left: 25,right: 25,top: screenh/9),
+      width: screenw,
+      height: screenh,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text('Register',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
+            ],
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 40,
+              )
+            ],
+          ),
+          Column(children: [
+            TextFormField(
+              validator: (val){
+                if(val!.isEmpty||val.length<2){
+                  return "Required";
+                }
+                return null;
+              },
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                  hintText: "First Name"
               ),
-        ) ),
+            ),
+            SizedBox(height: 30,),
+            TextFormField(
+              validator: (val){
+                if(val!.isEmpty||val.length<2){
+                  return "Required";
+                }
+                return null;
+              },
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                  hintText: "Second Name"
+              ),
+            ),
+            SizedBox(height: 30,),
+            TextFormField(
+              validator: (val){
+                if(val!.isEmpty||val.length<2){
+                  return "Required";
+                }
+                return null;
+              },
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                  hintText: "Email"
+              ),
+            ),
+            SizedBox(height: 30,),
+            TextFormField(
+              validator: (val){
+                if(val!.isEmpty||val.length<2){
+                  return "Required";
+                }
+                return null;
+              },
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                  hintText: "Password"
+              ),
+            ),
+            SizedBox(height: 30,),
+            TextFormField(
+              validator: (val){
+                if(val!.isEmpty||val.length<2){
+                  return "Required";
+                }
+                return null;
+              },
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                  hintText: "Confirm Password"
+
+              ),
+            ),
+          ],),
+          Expanded(child:Column(mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 50,
+                width: 350,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                        context, "/bottom_navigation_bar");
+                  },
+                  child: const Text("Register"),
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)))),
+                ),
+              ),
+              SizedBox(height: 10,),
+              TextButton(onPressed: (){
+                Navigator.pushReplacementNamed(context, "/");
+              }, child:const  Text("Already have an account"))
+            ],
+          ))
+        ],
       ),
+    ),
     );
   }
 }

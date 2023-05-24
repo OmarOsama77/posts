@@ -5,64 +5,55 @@ class AddPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenh = MediaQuery.of(context).size.height;
+    final screenw = MediaQuery.of(context).size.width;
     return  Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.only(top: 50,left: 25,right: 25),
-            child: Column(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Create post",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-                SizedBox(height: 20,),
-               Container(
-               width: 400,
-                height: 200,
-                 decoration: BoxDecoration(
-                   border: Border.all(width: 2,color: Colors.black),
-                   borderRadius: BorderRadius.all(Radius.circular(25)),
-                 ),
-                 child: Center(child: Text("Add Image",style: TextStyle(fontSize: 25),)),
-               ),
-                  SizedBox(height: 20,),
-                TextField(
-                  maxLines: 8,
-                  style: TextStyle(
-                      fontSize: 18, overflow: TextOverflow.clip),
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      borderSide: const BorderSide(
-                        width: 2,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      borderSide: const BorderSide(
-                          color: Colors.black,
-                          width: 1),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 70,),
-                SizedBox(
-                  height: 50,
-                  width: 350,
-                  child: ElevatedButton(onPressed: (){
 
-                  }, child: const Text("Post"),
-                    style: ButtonStyle(
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)
-                        ))
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      )
+       body: Container(
+         padding: EdgeInsets.only(top: screenh/11,left: screenw/45,right: screenw/45),
+         width:screenw,
+         height:screenh,
+         child: Column(
+           children: [
+              Text("Create Post",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+             Row(
+               children: [
+                 CircleAvatar(
+                   radius: 30,
+                   backgroundImage: AssetImage("images/ronaldo.jpg"),
+                 ),
+                 SizedBox(width: 20,),
+                 Text("Cristiano Ronaldo")
+               ],
+             ),
+
+             Padding(
+               padding:   EdgeInsets.only(top:screenh/44),
+               child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                 children: [
+                   TextFormField(
+                     decoration: InputDecoration(
+                       hintText: "What is on your mind ?",
+                       border: OutlineInputBorder(
+                         borderRadius: BorderRadius.circular(22)
+                       )
+                     ),
+                   ),
+                   Container(
+                     width: 250,
+                     height: 250,
+                     decoration: BoxDecoration(
+                       border: Border.all(
+                         color: Colors.black,
+                       ),
+                     ),
+                   )
+                 ],
+               ),
+             )
+           ],
+         ),
+       ),
     );
   }
 }
