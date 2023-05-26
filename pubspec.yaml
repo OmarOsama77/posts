@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   fluttertoast: ^8.2.1
   provider:
+  firebase_auth:
+  firebase_core:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +69,7 @@ flutter:
    - images/register.png
    - images/s.jpg
    - images/ronaldo.jpg
+   - images/user.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
