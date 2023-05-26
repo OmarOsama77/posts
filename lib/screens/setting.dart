@@ -14,7 +14,7 @@ class Setting extends StatelessWidget {
   }
     void passwordDialog (BuildContext context){
         showDialog(context: context, builder: (context)=>AlertDialog(
-            title: Text("Change Password"),
+            title: const Text("Change Password"),
             content: Column(mainAxisSize: MainAxisSize.min,
               children: [
                   textField("Old Password"),
@@ -23,7 +23,7 @@ class Setting extends StatelessWidget {
               ],
             ),
             actions: [
-              ElevatedButton(onPressed: (){}, child: Text("submit"))
+              ElevatedButton(onPressed: (){}, child: const Text("submit"))
             ],
         ));
     }   
@@ -32,7 +32,7 @@ class Setting extends StatelessWidget {
               title: Text(title),
               content:  textField(hintText),
               actions: [
-                ElevatedButton(onPressed: (){}, child: Text("Submit"))
+                ElevatedButton(onPressed: (){}, child: const Text("Submit"))
               ],
     ));
       }
@@ -41,7 +41,7 @@ class Setting extends StatelessWidget {
           children: [
                  Column(crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(t1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        Text(t1,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                         Text(t2)
                       ],
                     ),
@@ -54,60 +54,59 @@ class Setting extends StatelessWidget {
       }
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     final data = Provider.of<SettingViewModel>(context);
     return Scaffold(
       body:   SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.only(top: 50,left: 25,right: 25),
+            padding: const EdgeInsets.only(top: 50,left: 25,right: 25),
             width: double.infinity,
             child: Column(mainAxisAlignment: MainAxisAlignment.spaceAround,crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Text("Settings",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)),
-                SizedBox(height: 12,),
-                Row(
+                const Center(child: Text("Settings",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)),
+                const SizedBox(height: 12,),
+                const Row(
                   children: [
                     CircleAvatar(radius: 35,backgroundImage: AssetImage("images/ronaldo.jpg"),),
                     SizedBox(width: 10,),
                     Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text("Cristiano Ronaldo"),
-                        
-                        Text("CR7@RealMadrid.com")
+                           Text("Cristiano Ronaldo"),
+
+                           Text("CR7@RealMadrid.com")
                       ],
                     )
                   ],
                 ),
-                SizedBox(height: 15,),
-                Text("Account Information",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                SizedBox(height: 20,),
+                const SizedBox(height: 15,),
+                const   Text("Account Information",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                const  SizedBox(height: 20,),
                 settingItem((){
                   showDialogg(context,"First Name","Enter your first name");
-                }, "First Name", "Change your first name",Icon(Icons.arrow_forward)),
-                SizedBox(height: 20,),
-                 
+                }, "First Name", "Change your first name",const Icon(Icons.arrow_forward)),
+                const  SizedBox(height: 20,),
+
               settingItem((){
                 showDialogg(context,"Second Name","Enter your second name");
-              }, "Second Name", "Change your Second name",Icon(Icons.arrow_forward)),     
-                SizedBox(height: 20,),
+              }, "Second Name", "Change your Second name",const Icon(Icons.arrow_forward)),
+                const  SizedBox(height: 20,),
               settingItem(() {
                 passwordDialog(context);
-              }, "Password", "Change your password",Icon(Icons.arrow_forward)),
-               SizedBox(height: 20,),
-              settingItem(() => null, "Logout", "Logout from your account",Icon(Icons.logout)),
-                SizedBox(height: 20,),
+              }, "Password", "Change your password",const Icon(Icons.arrow_forward)),
+                const  SizedBox(height: 20,),
+              settingItem(() => null, "Logout", "Logout from your account",const Icon(Icons.logout)),
+                const  SizedBox(height: 20,),
                 settingItem((){
                   showDialog(context: context, builder: (context)=>AlertDialog(
-                      title: Text("Delete account"),
+                      title: const Text("Delete account"),
                       content: Column(mainAxisSize: MainAxisSize.min,
                         children: [
-                            Text("Are you sure you want to delete your account"),
+                          const Text("Are you sure you want to delete your account"),
                             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                ElevatedButton(onPressed: (){}, child: Text("Cancel")
+                                ElevatedButton(onPressed: (){}, child:const Text("Cancel")
                                 ),
-                                ElevatedButton(onPressed: (){}, child: Text("Yes"),style:ElevatedButton.styleFrom(
+                                ElevatedButton(onPressed: (){}, child:const Text("Yes"),style:ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red
                                 ) ,)
                               ],
@@ -115,7 +114,7 @@ class Setting extends StatelessWidget {
                         ],
                       ),
                   ));
-                }, "Delete account !", "Delete your account ",Icon(Icons.delete)),
+                }, "Delete account !", "Delete your account ",const Icon(Icons.delete)),
               ],
             ),
           ),

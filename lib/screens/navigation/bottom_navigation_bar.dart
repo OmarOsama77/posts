@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:posts/screens/posts.dart';
-import 'package:posts/screens/setting.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../providers/bottom_nav_bar_provider.dart';
-import '../home.dart';
+
 
 class BottomNavigationScreen extends StatelessWidget {
 
@@ -22,10 +21,10 @@ final data = Provider.of<NavigationProvider>(context);
           onTap: (index){
             data.setIndex=index;
           },
-          items:[
-            BottomNavigationBarItem(icon:Icon(Icons.home),label: "Home"),
-            BottomNavigationBarItem(icon:Icon(Icons.add),label: "Post"),
-            BottomNavigationBarItem(icon:Icon(Icons.settings),label: "Settings"),
+          items:const [
+              BottomNavigationBarItem(icon:Icon(Icons.home),label: "Home"),
+              BottomNavigationBarItem(icon:Icon(Icons.add),label: "Post"),
+              BottomNavigationBarItem(icon:Icon(Icons.settings),label: "Settings"),
           ]),
     );
   }

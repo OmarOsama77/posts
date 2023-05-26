@@ -10,14 +10,14 @@ class PostItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(22),
-            color: Color(0xFFFFFFFF)
+            color: const Color(0xFFFFFFFF)
         ),
         width: 270,
 
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15, top: 10),
+            const Padding(
+              padding:   EdgeInsets.only(left: 15, top: 10),
               child: Row(
                 children: [
                   CircleAvatar(
@@ -36,8 +36,8 @@ class PostItem extends StatelessWidget {
             ),
             Container(
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(top: 15,left: 15,bottom: 20),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                padding:const EdgeInsets.only(top: 15,left: 15,bottom: 20),
+                child: const Column(crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Ronaldo is the best football player of all time suiiiii"),
                     SizedBox(height: 20,),
@@ -47,7 +47,7 @@ class PostItem extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
 
                   image:  DecorationImage(image:AssetImage("images/ronaldo.jpg"),fit: BoxFit.fill)
               ),

@@ -12,65 +12,48 @@ class Login extends StatelessWidget {
     final screenw = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Colors.white,
-        body: 
-        Container(
-          padding: EdgeInsets.only(top: 25, left: 0, right: 0),
-          width: screenw,
-          height: screenh,
-          child: 
-            Column(
-               children: [
-                  Column(mainAxisAlignment: MainAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 50,),
+          child: Column(
+            children: [
+              Image.asset("images/login3.png"),
+             const Padding(
+                padding:   EdgeInsets.only(left: 15),
+                child: Row(
+                  children: [
+                    Text("Login",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
+                  ],
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 25,right: 25,top: 15),
+                child: Center(
+                  child:Column(
                     children: [
-                         Image.asset("images/login3.png")
-                    ],
-            ),
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left:25),
-                    child: Row(
-                      children: [
-                        Text("Login",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left:30,right: 30,top: 20),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                  
+                      TextFormField(
+
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.email), hintText: "Email"),
                       ),
-                      SizedBox(height: 25,),
+                      const SizedBox(height: 25,),
                       TextFormField(
 
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.lock), hintText: "Password"),
-                    ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right:30),
-                child: Row(mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                   TextButton(onPressed: (){}, child: Text("Forgot Password ?"))
-                  ],
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.lock), hintText: "Password"),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: 20,),
-              Expanded(child: Center(
-                child: Column(
-                  children: [
-                    SizedBox(
+              const SizedBox(height: 25,),
+              Column(mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SizedBox(
                     height: 50,
                     width: 350,
                     child: ElevatedButton(
@@ -78,7 +61,7 @@ class Login extends StatelessWidget {
                         Navigator.pushReplacementNamed(
                             context, "/bottom_navigation_bar");
                       },
-                      child: const Text("Login"),
+                          child: const Text("Login"),
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
@@ -88,11 +71,12 @@ class Login extends StatelessWidget {
                   TextButton(onPressed: (){
                     Navigator.pushReplacementNamed(context, "/signup");
                   }, child:const  Text("Register"))
-                  ],
-                ),
-              ))
-          ],
-         )
-        ));
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
