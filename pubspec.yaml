@@ -39,6 +39,8 @@ dependencies:
   provider:
   firebase_auth:
   firebase_core:
+  image_picker: ^0.8.7+5
+  http:
 dev_dependencies:
   flutter_test:
     sdk: flutter

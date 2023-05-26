@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:posts/providers/bottom_nav_bar_provider.dart';
 import 'package:posts/providers/register_view_model.dart';
 import 'package:posts/providers/settings_provider.dart';
+import 'package:posts/providers/signup_view_model.dart';
 import 'package:posts/screens/home.dart';
 import 'package:posts/screens/authentication_screens/login.dart';
 import 'package:posts/screens/navigation/bottom_navigation_bar.dart';
 import 'package:posts/screens/authentication_screens/signup.dart';
 import 'package:provider/provider.dart';
+
+import 'Api/api_service.dart';
 
 Future<void>  main()async {
    WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +29,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create:(_)=>RegisterViewModel()),
         ChangeNotifierProvider(create:(_)=>NavigationProvider()),
         ChangeNotifierProvider(create:(_)=>SettingViewModel()),
-
+        ChangeNotifierProvider(create:(_)=>SignupViewModel()),
+        ChangeNotifierProvider(create:(_)=>ApiService()),
       ],
       child: MaterialApp(
           initialRoute: '/',

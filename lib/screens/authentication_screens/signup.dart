@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/signup_view_model.dart';
 
 
 
@@ -11,9 +15,10 @@ class Signup extends StatelessWidget {
   TextEditingController password = TextEditingController();
   TextEditingController confirmPass = TextEditingController();
 
+
     Widget passwordFormField(TextEditingController controller,String hintText){
       return TextFormField(
-        controller: confirmPass,
+        controller: controller,
         validator: (val){
           if(val!.isEmpty||val.length<2){
             return "Required";
@@ -56,17 +61,24 @@ class Signup extends StatelessWidget {
           padding: const EdgeInsets.only(top: 45,left: 31,right: 31),
           child: Column(
             children: [
-             Row(
+            const Row(
                children: [
                Text("Register",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),)
                ],
              ),
-               Center(
-                  child: CircleAvatar(
+            Consumer<SignupViewModel>(builder:(_,viewModel,__){
+              return  Center(
+                child: GestureDetector(
+                  onTap: (){
+                      viewModel.uploadUserPicture();
+                  },
+                  child:  CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage("images/user.png"),
+                    backgroundImage: viewModel.selectedImage==null?AssetImage("images/user.png"):viewModel.selectedImage,
                   ),
-               ),
+                ),
+              );
+            }),
                  Column(
                   children: [
                     textFormField("First Name",firstName),
@@ -99,18 +111,23 @@ class Signup extends StatelessWidget {
                   SizedBox(
                     height: 50,
                     width: 350,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if(myKey.currentState!.validate()){
+                    child:
+                Consumer<SignupViewModel>(builder: (_,viewModel,__){
+                  return ElevatedButton(
+                    onPressed: () {
+                            if(myKey.currentState!.validate()&&viewModel.validation(password.text.trim(),confirmPass.text.trim())&&viewModel.isThereImage()){
 
-                        }
-                      },
-                      child: const Text("Register"),
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)))),
-                    ),
+                            }else{
+                               Fluttertoast.showToast(msg:"Please try again");
+                            }
+                    },
+                    child: const Text("Register"),
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)))),
+                  );
+                },)
                   ),
                   const SizedBox(height: 10,),
                   TextButton(onPressed: (){

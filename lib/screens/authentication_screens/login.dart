@@ -19,7 +19,7 @@ class Login extends StatelessWidget {
             padding: const EdgeInsets.only(top: 50,),
             child: Column(
               children: [
-                Image.asset("images/login3.png"),
+                Image.asset("images/login3.png",width:300,height: 350,),
                const Padding(
                   padding:   EdgeInsets.only(left: 15),
                   child: Row(
@@ -77,7 +77,7 @@ class Login extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                             if(myKey.currentState!.validate()){
-                                  Navigator.pushReplacementNamed(context, "/home");
+                                  Navigator.pushReplacementNamed(context, "/bottom_navigation_bar");
                             }
                         },
                         child: const Text("Login"),

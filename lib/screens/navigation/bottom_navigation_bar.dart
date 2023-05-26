@@ -6,9 +6,6 @@ import '../../providers/bottom_nav_bar_provider.dart';
 
 
 class BottomNavigationScreen extends StatelessWidget {
-
-
-
   @override
   Widget build(BuildContext context) {
 final data = Provider.of<NavigationProvider>(context);
@@ -21,7 +18,7 @@ final data = Provider.of<NavigationProvider>(context);
           onTap: (index){
             data.setIndex=index;
           },
-          items:const [
+          items: [
               BottomNavigationBarItem(icon:Icon(Icons.home),label: "Home"),
               BottomNavigationBarItem(icon:Icon(Icons.add),label: "Post"),
               BottomNavigationBarItem(icon:Icon(Icons.settings),label: "Settings"),
