@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/authentication_view_model.dart';
 import '../providers/settings_provider.dart';
 
 class Setting extends StatelessWidget {
@@ -87,7 +88,7 @@ class Setting extends StatelessWidget {
               const SizedBox(
                 height: 12,
               ),
-              const Row(
+                Row(
                 children: [
                   CircleAvatar(
                     radius: 35,
@@ -96,14 +97,16 @@ class Setting extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text("Cristiano Ronaldo"),
-                      Text("CR7@RealMadrid.com")
-                    ],
-                  )
+                  Consumer<AuthenticationViewModel>(builder:(_,viewModel,__){
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(viewModel.currentUser!.displayName.toString()),
+                        Text(viewModel.currentUser!.email.toString())
+                      ],
+                    );
+                  })
                 ],
               ),
               const SizedBox(

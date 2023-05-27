@@ -1,5 +1,6 @@
  import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:posts/providers/authentication_view_model.dart';
 import 'package:posts/providers/bottom_nav_bar_provider.dart';
 import 'package:posts/providers/register_view_model.dart';
 import 'package:posts/providers/settings_provider.dart';
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create:(_)=>RegisterViewModel()),
         ChangeNotifierProvider(create:(_)=>NavigationProvider()),
         ChangeNotifierProvider(create:(_)=>SettingViewModel()),
-        ChangeNotifierProvider(create:(_)=>SignupViewModel()),
-        ChangeNotifierProvider(create:(_)=>ApiService()),
+        ChangeNotifierProvider(create:(_)=>SignupViewModel(ApiService())),
+        ChangeNotifierProvider(create:(_)=>AuthenticationViewModel()),
+
       ],
       child: MaterialApp(
           initialRoute: '/',

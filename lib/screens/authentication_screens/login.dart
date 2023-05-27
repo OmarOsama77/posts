@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:posts/providers/authentication_view_model.dart';
+
 
 import 'package:provider/provider.dart';
 
@@ -68,24 +70,36 @@ class Login extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 25,),
+                SizedBox(height: 10,),
+                Row(mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(onPressed: (){}, child: Text("Forgot Passowrd ? "))
+                  ],
+                ),
+                const SizedBox(height: 15,),
                 Column(mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     SizedBox(
                       height: 50,
                       width: 350,
-                      child: ElevatedButton(
-                        onPressed: () {
-                            if(myKey.currentState!.validate()){
-                                  Navigator.pushReplacementNamed(context, "/bottom_navigation_bar");
-                            }
-                        },
-                        child: const Text("Login"),
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)))),
-                      ),
+                      child:
+                   Consumer<AuthenticationViewModel>(builder: (_,viewModel,__){
+                     return ElevatedButton(
+                       onPressed: () {
+                         viewModel.login(email.text.trim(), password.text.trim());
+                         if(myKey.currentState!.validate()&&viewModel.currentUser!=null){
+                           print("object ${viewModel.currentUser}");
+                            Navigator.pushReplacementNamed(context, "/bottom_navigation_bar");
+
+                         }
+                       },
+                       child: const Text("Login"),
+                       style: ButtonStyle(
+                           shape: MaterialStateProperty.all(
+                               RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(15)))),
+                     );
+                   },)
                     ),
                     TextButton(onPressed: (){
                       Navigator.pushReplacementNamed(context, "/signup");
