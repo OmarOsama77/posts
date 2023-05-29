@@ -5,10 +5,12 @@ import 'package:posts/providers/bottom_nav_bar_provider.dart';
 import 'package:posts/providers/register_view_model.dart';
 import 'package:posts/providers/settings_provider.dart';
 import 'package:posts/providers/signup_view_model.dart';
+import 'package:posts/providers/splash_screen_view_model.dart';
 import 'package:posts/screens/home.dart';
 import 'package:posts/screens/authentication_screens/login.dart';
 import 'package:posts/screens/navigation/bottom_navigation_bar.dart';
 import 'package:posts/screens/authentication_screens/signup.dart';
+import 'package:posts/screens/authentication_screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'Api/api_service.dart';
@@ -32,15 +34,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create:(_)=>SettingViewModel()),
         ChangeNotifierProvider(create:(_)=>SignupViewModel(ApiService())),
         ChangeNotifierProvider(create:(_)=>AuthenticationViewModel()),
+        ChangeNotifierProvider(create:(_)=>SplashViewModel()),
 
       ],
       child: MaterialApp(
           initialRoute: '/',
         routes: {
-            '/':(_)=>Login(),
-          '/signup':(_)=>Signup(),
-          "/home":(_)=>Home(),
-          "/bottom_navigation_bar":(_)=>BottomNavigationScreen()
+            '/':(_)=>SplashScreen(),
+           '/login':(_)=>Login(),
+           '/signup':(_)=>Signup(),
+           "/home":(_)=>Home(),
+           "/bottom_navigation_bar":(_)=>BottomNavigationScreen()
         },
       ),
     );

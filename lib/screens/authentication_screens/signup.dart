@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:posts/Api/api_service.dart';
@@ -67,7 +69,7 @@ class Signup extends StatelessWidget {
                 return Center(
                   child: GestureDetector(
                     onTap: () {
-                      viewModel.uploadUserPicture();
+                      viewModel.getUserPicture();
                     },
                     child: CircleAvatar(
                       radius: 40,
@@ -122,12 +124,17 @@ class Signup extends StatelessWidget {
                       Consumer<SignupViewModel>(
                         builder: (_, viewModel, __) {
                           return ElevatedButton(
-                            onPressed: () {
-                              if (myKey.currentState!.validate() && viewModel.validation(password.text.trim(), confirmPass.text.trim()) && viewModel.isThereImage()) {
-                                authViewModel.register(email.text.trim(), password.text.trim(),firstName.text.trim(),secondName.text.trim());
-                              } else {
-                                Fluttertoast.showToast(msg: "Please try again");
-                              }
+                            onPressed: ()async {
+
+                             if(myKey.currentState!.validate()&&viewModel.isThereImage()&&viewModel.validation(password.text.trim(), confirmPass.text.trim())){
+                                if(await authViewModel.register(email.text.trim(), password.text.trim(), firstName.text.trim(), secondName.text.trim())){
+                                    print("Account created");
+                                  Fluttertoast.showToast(msg: "Account created succesfully");
+
+                                }
+                             }else{
+                               Fluttertoast.showToast(msg: "Please try again");
+                             }
                             },
                             child: const Text("Register"),
                             style: ButtonStyle(
@@ -143,7 +150,7 @@ class Signup extends StatelessWidget {
                   ),
                   TextButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, "/");
+                        Navigator.pushReplacementNamed(context, "/login");
                       },
                       child: const Text("Already have an account"))
                 ],

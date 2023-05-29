@@ -7,18 +7,41 @@ class AuthenticationViewModel with ChangeNotifier{
    User? get currentUser {
      return firebaseAuth.currentUser;
    }
-   Future <void> login(String email,String password)async{
-      await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+   Future <bool> login(String email,String password)async{
+      UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      if(userCredential!=null){
+        return true;
+      }
+      return false;
+   }
+   Future <bool> register(String email,String password,String firstName,String secondName)async{
+     try{
+       await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+       currentUser?.updateDisplayName("$firstName $secondName");
+       return true;
+     }catch(e){
+       print("Error while creating account $e");
+       return false;
+     }
 
    }
-   Future <void> register(String email,String password,String firstName,String secondName)async{
-     await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-     currentUser?.updateDisplayName("$firstName $secondName");
-   }
-   Future <void> signOut(String email,String password)async{
-      await firebaseAuth.signOut();
+   Future <bool> signOut()async{
+      try{
+        await firebaseAuth.signOut();
+        return true;
+      }catch(e){
+        return false;
+      }
    }
    Stream get authStateChanges {
      return firebaseAuth.authStateChanges();
+   }
+   Future <bool> deleteAccount (String email)async{
+    try{
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+      return true;
+    }catch(e){
+      return false;
+    }
    }
 }

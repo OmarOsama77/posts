@@ -41,6 +41,9 @@ dependencies:
   firebase_core:
   image_picker: ^0.8.7+5
   http:
+  lottie: ^2.2.0
+  firebase_storage:
+  firefuel_core:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -72,6 +75,9 @@ flutter:
    - images/s.jpg
    - images/ronaldo.jpg
    - images/user.png
+   - assets/lottie_splash.json
+   - assets/lottie_splash2.json
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

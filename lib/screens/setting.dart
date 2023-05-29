@@ -140,8 +140,14 @@ class Setting extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              settingItem(() => null, "Logout", "Logout from your account",
-                  const Icon(Icons.logout)),
+            Consumer<AuthenticationViewModel>(builder:(_,viewModel,__){
+              return  settingItem(()async{
+                 if(await viewModel.signOut()){
+                   Navigator.pushReplacementNamed(context, "/login");
+                 }
+              }, "Logout", "Logout from your account",
+                  const Icon(Icons.logout));
+            }),
               const SizedBox(
                 height: 20,
               ),

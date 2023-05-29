@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:posts/providers/authentication_view_model.dart';
 
 
@@ -9,9 +10,11 @@ class Login extends StatelessWidget {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     final myKey = GlobalKey<FormState>();
+
     return Scaffold(
         backgroundColor: Colors.white,
       body: Form(
@@ -73,7 +76,9 @@ class Login extends StatelessWidget {
                 SizedBox(height: 10,),
                 Row(mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    TextButton(onPressed: (){}, child: Text("Forgot Passowrd ? "))
+                    TextButton(onPressed: (){
+
+                    }, child: Text("Forgot Passowrd ? "))
                   ],
                 ),
                 const SizedBox(height: 15,),
@@ -85,12 +90,14 @@ class Login extends StatelessWidget {
                       child:
                    Consumer<AuthenticationViewModel>(builder: (_,viewModel,__){
                      return ElevatedButton(
-                       onPressed: () {
-                         viewModel.login(email.text.trim(), password.text.trim());
-                         if(myKey.currentState!.validate()&&viewModel.currentUser!=null){
+                       onPressed: () async{
+                         if(myKey.currentState!.validate()){
                            print("object ${viewModel.currentUser}");
+                           if(await viewModel.login(email.text.trim(), password.text.trim())){
                             Navigator.pushReplacementNamed(context, "/bottom_navigation_bar");
-
+                           }
+                         }else{
+                           Fluttertoast.showToast(msg: "Error");
                          }
                        },
                        child: const Text("Login"),
