@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -71,12 +72,13 @@ class Signup extends StatelessWidget {
                     onTap: () {
                       viewModel.getUserPicture();
                     },
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: viewModel.selectedImage == null
-                          ? AssetImage("images/user.png")
-                          : viewModel.selectedImage,
-                    ),
+                    child:
+                        FutureBuilder(builder:(context,snapshoot){
+                        return  CircleAvatar(
+                            radius: 40,
+                              backgroundImage:  AssetImage("images/user.png")
+                             );
+                        })
                   ),
                 );
               }),
@@ -128,9 +130,8 @@ class Signup extends StatelessWidget {
 
                              if(myKey.currentState!.validate()&&viewModel.isThereImage()&&viewModel.validation(password.text.trim(), confirmPass.text.trim())){
                                 if(await authViewModel.register(email.text.trim(), password.text.trim(), firstName.text.trim(), secondName.text.trim())){
-                                    print("Account created");
+                                  print("Account created");
                                   Fluttertoast.showToast(msg: "Account created succesfully");
-
                                 }
                              }else{
                                Fluttertoast.showToast(msg: "Please try again");
