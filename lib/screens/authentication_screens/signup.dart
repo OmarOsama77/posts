@@ -50,6 +50,7 @@ class Signup extends StatelessWidget {
   Widget build(BuildContext context) {
     final myKey = GlobalKey<FormState>();
     AuthenticationViewModel authViewModel = AuthenticationViewModel();
+
     return Scaffold(
         body: Form(
       key: myKey,
@@ -70,15 +71,14 @@ class Signup extends StatelessWidget {
                 return Center(
                   child: GestureDetector(
                     onTap: () {
-                      viewModel.getUserPicture();
+                      viewModel.getImage();
                     },
-                    child:
-                        FutureBuilder(builder:(context,snapshoot){
-                        return  CircleAvatar(
+                    child: CircleAvatar(
                             radius: 40,
-                              backgroundImage:  AssetImage("images/user.png")
-                             );
-                        })
+                              backgroundImage: viewModel.image==null? AssetImage("images/user.png")
+                                  :FileImage(File(viewModel.image!.path)) as ImageProvider
+
+                       )
                   ),
                 );
               }),
@@ -132,6 +132,9 @@ class Signup extends StatelessWidget {
                                 if(await authViewModel.register(email.text.trim(), password.text.trim(), firstName.text.trim(), secondName.text.trim())){
                                   print("Account created");
                                   Fluttertoast.showToast(msg: "Account created succesfully");
+                                  viewModel.uploadUserImage();
+                                  authViewModel.addUserImage("https://github.com/OmarOsama788/revision/assets/108674357/458a4626-a58e-4188-8188-961df44ec66d");
+                                  viewModel.uploadUserData(firstName.text.trim(), secondName.text.trim(), email.text.trim(), viewModel.userImage.toString());
                                 }
                              }else{
                                Fluttertoast.showToast(msg: "Please try again");

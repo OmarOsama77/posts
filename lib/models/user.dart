@@ -1,4 +1,5 @@
 class User{
+ String? userId;
  late String firstName;
  late String secondName;
  late String email;
@@ -6,7 +7,8 @@ class User{
 
   User(
       {
-     required this.firstName,
+        this.userId,
+        required this.firstName,
         required this.secondName,
         required this.email,
         required this.imageUrl});

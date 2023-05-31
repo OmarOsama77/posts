@@ -19,61 +19,38 @@ class SignupViewModel with ChangeNotifier{
     }
     return false;
   }
-  var selectedImage;
-  Future<void> getUserPicture()async{
-    var imagePicker = ImagePicker();
-    final pickedImage =  await imagePicker.pickImage(source: ImageSource.gallery);
-    final file =File(pickedImage!.path);
-    selectedImage = FileImage(file) as ImageProvider<Object>;
-
-    notifyListeners();
-  }
 
 
-
-
-  File? image;
+  PickedFile? image;
   Uint8List? bytes;
   String? image64;
   String? userImage;
   Future<void> getImage()async{
     var picker = ImagePicker();
-    PickedFile? image;
     image = await picker.getImage(source: ImageSource.gallery);
-    if(image!.path.isNotEmpty){
-        image = File(image!.path) as PickedFile?;
-        bytes = File(image!.path).readAsBytesSync();
-        image64 = base64Encode(bytes!);
-        userImage=image64!;
-    }else{
-      if(kDebugMode){
-        print("null");
-      }
-    }
-
+    notifyListeners();
   }
-
-
-
-
-
-
-
-
+ void uploadUserImage(){
+  if(image!.path.isNotEmpty){
+    bytes = File(image!.path).readAsBytesSync();
+    image64 = base64Encode(bytes!);
+    userImage=image64!;
+  }else{
+    if(kDebugMode){
+      print("null");
+    }
+  }
+}
 
 
   bool isThereImage(){
-    if(selectedImage==null){
+    if(image==null){
         return false;
     }
     return true;
   }
-  void signUp(String firstName , String secondName , String email,String imageUrl ){
-    service.register(user: User(firstName: firstName, secondName: secondName, email: email, imageUrl: imageUrl), firstName: firstName);
-  }
-  Future <void> sendImage()async{
-    var imagePicker = ImagePicker();
-
+  void uploadUserData(String firstName , String secondName , String email,String imageUrl){
+    service.register(user: User(firstName: firstName, secondName: secondName, email: email, imageUrl: imageUrl));
   }
 
 }

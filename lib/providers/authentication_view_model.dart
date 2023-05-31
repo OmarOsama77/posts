@@ -7,6 +7,10 @@ class AuthenticationViewModel with ChangeNotifier{
    User? get currentUser {
      return firebaseAuth.currentUser;
    }
+   String? get photo{
+     return firebaseAuth.currentUser!.photoURL;
+   }
+
    Future <bool> login(String email,String password)async{
       UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
       if(userCredential!=null){
@@ -44,4 +48,8 @@ class AuthenticationViewModel with ChangeNotifier{
       return false;
     }
    }
+   Future<void> addUserImage(String userImage)async{
+    await currentUser!.updateDisplayName(userImage);
+   }
+
 }
