@@ -11,8 +11,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthenticationViewModel authViewModel = AuthenticationViewModel();
-    print("sdjiha ${authViewModel.currentUser}");
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

@@ -6,6 +6,7 @@ import 'package:posts/providers/register_view_model.dart';
 import 'package:posts/providers/settings_provider.dart';
 import 'package:posts/providers/signup_view_model.dart';
 import 'package:posts/providers/splash_screen_view_model.dart';
+import 'package:posts/providers/upload_post_view_model.dart';
 import 'package:posts/screens/home.dart';
 import 'package:posts/screens/authentication_screens/login.dart';
 import 'package:posts/screens/navigation/bottom_navigation_bar.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create:(_)=>SignupViewModel(ApiService())),
         ChangeNotifierProvider(create:(_)=>AuthenticationViewModel()),
         ChangeNotifierProvider(create:(_)=>SplashViewModel()),
-
+        ChangeNotifierProvider(create:(_)=>UploadPost()),
       ],
       child: MaterialApp(
           initialRoute: '/',

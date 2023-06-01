@@ -75,8 +75,8 @@ class Signup extends StatelessWidget {
                     },
                     child: CircleAvatar(
                             radius: 40,
-                              backgroundImage: viewModel.image==null? AssetImage("images/user.png")
-                                  :FileImage(File(viewModel.image!.path)) as ImageProvider
+                        backgroundImage: viewModel.image==null? AssetImage("images/user.png")
+                            :FileImage(File(viewModel.image!.path)) as ImageProvider
 
                        )
                   ),
@@ -130,10 +130,8 @@ class Signup extends StatelessWidget {
 
                              if(myKey.currentState!.validate()&&viewModel.isThereImage()&&viewModel.validation(password.text.trim(), confirmPass.text.trim())){
                                 if(await authViewModel.register(email.text.trim(), password.text.trim(), firstName.text.trim(), secondName.text.trim())){
-                                  print("Account created");
                                   Fluttertoast.showToast(msg: "Account created succesfully");
                                   viewModel.uploadUserImage();
-                                  authViewModel.addUserImage("https://github.com/OmarOsama788/revision/assets/108674357/458a4626-a58e-4188-8188-961df44ec66d");
                                   viewModel.uploadUserData(firstName.text.trim(), secondName.text.trim(), email.text.trim(), viewModel.userImage.toString());
                                 }
                              }else{

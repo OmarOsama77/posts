@@ -1,23 +1,14 @@
+import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:posts/models/user.dart';
-import '../Api/api_service.dart';
+import 'package:posts/Api/api_service.dart';
+import 'package:posts/models/post.dart';
 
-class SignupViewModel with ChangeNotifier{
-
-  ApiService service  = ApiService();
-  SignupViewModel(this.service);
-  bool validation(String password,String confirmPassword){
-    if(password==confirmPassword){
-      return true;
-    }
-    return false;
-  }
+class UploadPost with ChangeNotifier{
+  ApiService service = ApiService();
   PickedFile? image;
   Uint8List? bytes;
   String? image64;
@@ -47,9 +38,12 @@ class SignupViewModel with ChangeNotifier{
     return true;
   }
 
-
-  void uploadUserData(String firstName , String secondName , String email,String imageUrl){
-    service.register(user: User(firstName: firstName, secondName: secondName, email: email, imageUrl: imageUrl,));
+  void sendPost (String userName,String title,String imageUrl,List<String> comments){
+    service.uploadPost(
+      post: Post(userName: userName, title: title, imageUrl: imageUrl, comments: comments)
+    );
   }
+
+
 
 }

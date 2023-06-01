@@ -49,7 +49,12 @@ class AuthenticationViewModel with ChangeNotifier{
     }
    }
    Future<void> addUserImage(String userImage)async{
-    await currentUser!.updateDisplayName(userImage);
+     try{
+       await currentUser!.updatePhotoURL(userImage);
+     }catch(e){
+       print("error $e");
+     }
+
    }
 
 }

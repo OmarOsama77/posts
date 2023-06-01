@@ -90,10 +90,12 @@ class Setting extends StatelessWidget {
               ),
                 Row(
                 children: [
-                  CircleAvatar(
+                Consumer<AuthenticationViewModel>(builder: (_,viewModel,__){
+                  return   CircleAvatar(
                     radius: 35,
-                    backgroundImage: AssetImage("images/ronaldo.jpg"),
-                  ),
+                    backgroundImage:AssetImage("images/s.jpg"),
+                  );
+                }),
                   SizedBox(
                     width: 10,
                   ),
