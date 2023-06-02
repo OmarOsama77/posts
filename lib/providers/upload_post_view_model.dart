@@ -38,12 +38,15 @@ class UploadPost with ChangeNotifier{
     return true;
   }
 
-  void sendPost (String userName,String title,String imageUrl,List<String> comments){
+  void sendPost (String userName,String title,String imageUrl,List<String> comments)  {
     service.uploadPost(
-      post: Post(userName: userName, title: title, imageUrl: imageUrl, comments: comments)
+        post: Post(
+            userName: userName,
+            title: title,
+            imageUrl: imageUrl,
+            comments: comments)
     );
+
   }
-
-
 
 }

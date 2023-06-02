@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:posts/providers/authentication_view_model.dart';
+import 'package:posts/providers/login_view_model.dart';
 
 
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myKey = GlobalKey<FormState>();
-
+    AuthenticationViewModel authViewModel = AuthenticationViewModel();
     return Scaffold(
         backgroundColor: Colors.white,
       body: Form(
@@ -88,12 +89,12 @@ class Login extends StatelessWidget {
                       height: 50,
                       width: 350,
                       child:
-                   Consumer<AuthenticationViewModel>(builder: (_,viewModel,__){
+                   Consumer<LoginViewModel>(builder: (_,viewModel,__){
                      return ElevatedButton(
                        onPressed: () async{
                          if(myKey.currentState!.validate()){
-                           print("object ${viewModel.currentUser}");
-                           if(await viewModel.login(email.text.trim(), password.text.trim())){
+                           if(await authViewModel.login(email.text.trim(), password.text.trim())){
+                            viewModel.findUserByEmail(email.text.trim());
                             Navigator.pushReplacementNamed(context, "/bottom_navigation_bar");
                            }
                          }else{
