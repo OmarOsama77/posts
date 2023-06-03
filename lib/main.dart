@@ -1,4 +1,5 @@
- import 'package:firebase_core/firebase_core.dart';
+ import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:posts/providers/authentication_view_model.dart';
 import 'package:posts/providers/bottom_nav_bar_provider.dart';
@@ -8,6 +9,7 @@ import 'package:posts/providers/settings_provider.dart';
 import 'package:posts/providers/signup_view_model.dart';
 import 'package:posts/providers/splash_screen_view_model.dart';
 import 'package:posts/providers/upload_post_view_model.dart';
+import 'package:posts/screens/comments.dart';
 import 'package:posts/screens/home.dart';
 import 'package:posts/screens/authentication_screens/login.dart';
 import 'package:posts/screens/navigation/bottom_navigation_bar.dart';
@@ -37,8 +39,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create:(_)=>AuthenticationViewModel()),
         ChangeNotifierProvider(create:(_)=>SplashViewModel()),
         ChangeNotifierProvider(create:(_)=>UploadPost()),
-        ChangeNotifierProvider(create:(_)=>HomeViewModel()),
         ChangeNotifierProvider(create:(_)=>LoginViewModel()),
+     ChangeNotifierProxyProvider<LoginViewModel,HomeViewModel>(create: (_)=>HomeViewModel(null), update: (context,loginViewModel,homeViewModel){
+            return HomeViewModel(loginViewModel.userData);
+    }),
+
+
+
+
       ],
       child: MaterialApp(
           initialRoute: '/',
@@ -47,7 +55,8 @@ class MyApp extends StatelessWidget {
            '/login':(_)=>Login(),
            '/signup':(_)=>Signup(),
            "/home":(_)=>Home(),
-           "/bottom_navigation_bar":(_)=>BottomNavigationScreen()
+           "/bottom_navigation_bar":(_)=>BottomNavigationScreen(),
+          "/comments":(_)=>Comments()
         },
       ),
     );

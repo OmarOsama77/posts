@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/comments.dart';
+
 class PostItem extends StatelessWidget {
   const PostItem({Key? key}) : super(key: key);
 
@@ -48,10 +50,12 @@ class PostItem extends StatelessWidget {
               width: double.infinity,
               height: 150,
               decoration: const BoxDecoration(
-
                   image:  DecorationImage(image:AssetImage("images/ronaldo.jpg"),fit: BoxFit.fill)
               ),
-            )
+            ),
+             TextButton(onPressed: (){
+               Navigator.pushNamed(context, "/comments");
+             }, child: Text("Comments",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black),)),
           ],
         ),
       ),

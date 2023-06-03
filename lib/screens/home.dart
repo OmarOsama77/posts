@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:posts/providers/authentication_view_model.dart';
+import 'package:posts/providers/home_view_model.dart';
 import 'package:posts/screens/posts.dart';
 import 'package:posts/screens/setting.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final data = Provider.of<HomeViewModel>(context);
+    print("objectdsa ${data.user!.secondName}");
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -26,11 +29,9 @@ class Home extends StatelessWidget {
                       "Home",
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
-                   Consumer<AuthenticationViewModel>(builder:(_,viewModel,__){
-                     return Text(
-                       viewModel.currentUser!.displayName.toString(),
-                     );
-                   })
+                    Consumer<HomeViewModel>(builder:(_,viewModel,__){
+                    return  Text("omar");
+                    })
                   ],
                 ),
               ),
@@ -40,7 +41,7 @@ class Home extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 5,
                   itemBuilder: (ctx, index) {
-                 return   PostItem();
+                 return PostItem();
                   })
             ],
           ),

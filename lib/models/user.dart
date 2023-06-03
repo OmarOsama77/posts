@@ -4,8 +4,6 @@ class User{
  late String secondName;
  late String email;
  late String imageUrl;
-
-
   User(
       {
         this.userId,
@@ -13,10 +11,7 @@ class User{
         required this.secondName,
         required this.email,
         required this.imageUrl,
-
       });
-
-
       Map<String , dynamic >toMap(){
         return {
           "firstName":firstName,
@@ -26,6 +21,4 @@ class User{
 
         };
       }
-
-
 }
