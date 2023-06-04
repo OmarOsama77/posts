@@ -57,7 +57,7 @@ class ApiService{
       final response =await http.get(url);
       final Map<String,dynamic> user = jsonDecode(response.body);
       user.forEach((key, value) {
-        final userData = User(firstName: value["firstName"], secondName: value["secondName"], email: value["email"], imageUrl: value["imageUrl"]);
+        final userData =User(firstName: value["firstName"], secondName: value["secondName"], email: value["email"], imageUrl: value["imageUrl"]);
         usersInfo.add(userData);
       });
       print("object ${usersInfo}");

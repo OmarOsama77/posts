@@ -5,6 +5,7 @@ import 'package:posts/providers/authentication_view_model.dart';
 import 'package:posts/providers/bottom_nav_bar_provider.dart';
 import 'package:posts/providers/home_view_model.dart';
 import 'package:posts/providers/login_view_model.dart';
+import 'package:posts/providers/posts_view_model.dart';
 import 'package:posts/providers/settings_provider.dart';
 import 'package:posts/providers/signup_view_model.dart';
 import 'package:posts/providers/splash_screen_view_model.dart';
@@ -12,6 +13,7 @@ import 'package:posts/providers/upload_post_view_model.dart';
 import 'package:posts/screens/comments.dart';
 import 'package:posts/screens/home.dart';
 import 'package:posts/screens/authentication_screens/login.dart';
+import 'package:posts/screens/myPosts.dart';
 import 'package:posts/screens/navigation/bottom_navigation_bar.dart';
 import 'package:posts/screens/authentication_screens/signup.dart';
 import 'package:posts/screens/authentication_screens/splash_screen.dart';
@@ -34,15 +36,22 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create:(_)=>NavigationProvider()),
-        ChangeNotifierProvider(create:(_)=>SettingViewModel()),
+
         ChangeNotifierProvider(create:(_)=>SignupViewModel(ApiService())),
         ChangeNotifierProvider(create:(_)=>AuthenticationViewModel()),
         ChangeNotifierProvider(create:(_)=>SplashViewModel()),
-        ChangeNotifierProvider(create:(_)=>UploadPost()),
         ChangeNotifierProvider(create:(_)=>LoginViewModel()),
-     ChangeNotifierProxyProvider<LoginViewModel,HomeViewModel>(create: (_)=>HomeViewModel(null), update: (context,loginViewModel,homeViewModel){
+        ChangeNotifierProxyProvider<LoginViewModel,HomeViewModel>(create: (_)=>HomeViewModel(null), update: (context,loginViewModel,homeViewModel){
             return HomeViewModel(loginViewModel.userData);
-    }),
+      }),
+        ChangeNotifierProxyProvider<LoginViewModel,UploadPostViewModel>(create: (_)=>UploadPostViewModel(null), update: (context,loginViewModel,uploadPostViewModel){
+          return UploadPostViewModel(loginViewModel.userData);
+        }),
+        ChangeNotifierProxyProvider<LoginViewModel,SettingViewModel>(create: (_)=>SettingViewModel(null), update: (context,loginViewModel,settingViewModel){
+          return SettingViewModel(loginViewModel.userData);
+        }),
+       ChangeNotifierProvider(create:(_)=>PostsViewModel()),
+
 
 
 
@@ -56,7 +65,8 @@ class MyApp extends StatelessWidget {
            '/signup':(_)=>Signup(),
            "/home":(_)=>Home(),
            "/bottom_navigation_bar":(_)=>BottomNavigationScreen(),
-          "/comments":(_)=>Comments()
+          "/comments":(_)=>Comments(),
+          "/myPosts":(_)=>MyPosts()
         },
       ),
     );

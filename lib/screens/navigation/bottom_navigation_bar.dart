@@ -10,8 +10,8 @@ class BottomNavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 final data = Provider.of<NavigationProvider>(context);
     return Scaffold(
-      body: Consumer<NavigationProvider>(builder: (_,viewModel,child){
-          return viewModel.navigation(viewModel.currentIndex);
+      body: Consumer<NavigationProvider>(builder: (_,viewModel,child) {
+          return  viewModel.navigation(viewModel.currentIndex);
       },) ,
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: data.currentIndex,

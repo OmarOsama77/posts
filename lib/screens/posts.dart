@@ -27,7 +27,7 @@ class AddPost extends StatelessWidget {
                       Text("Create Post",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
                     ],
                   ),
-                 Consumer<AuthenticationViewModel>(builder: (_,viewModel,__){
+                 Consumer<UploadPostViewModel>(builder: (_,viewModel,__){
                    return  Row(
                      children: [
                        CircleAvatar(
@@ -35,7 +35,7 @@ class AddPost extends StatelessWidget {
                          backgroundImage: AssetImage("images/ronaldo.jpg"),
                        ),
                        SizedBox(width: 10,),
-                       Text(viewModel.currentUser!.displayName.toString()),
+                       Text("${viewModel.user!.firstName} ${viewModel.user!.secondName}"),
                      ],
                    );
                  }),
@@ -52,7 +52,7 @@ class AddPost extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20,),
-              Consumer<UploadPost>(builder: (_,viewModel,__){
+              Consumer<UploadPostViewModel>(builder: (_,viewModel,__){
                 return   Center(
                   child: Column(mainAxisAlignment: MainAxisAlignment.start,
                     children: [

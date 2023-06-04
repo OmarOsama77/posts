@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:posts/Api/api_service.dart';
 import 'package:posts/models/post.dart';
+import 'package:posts/models/user.dart';
 
-class UploadPost with ChangeNotifier{
+class UploadPostViewModel with ChangeNotifier{
+  User? user;
+  UploadPostViewModel(this.user);
   ApiService service = ApiService();
   PickedFile? image;
   Uint8List? bytes;
@@ -48,5 +51,4 @@ class UploadPost with ChangeNotifier{
     );
 
   }
-
 }

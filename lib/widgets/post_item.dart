@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:posts/providers/home_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../screens/comments.dart';
 
 class PostItem extends StatelessWidget {
-  const PostItem({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<HomeViewModel>(context,listen: false);
         return Padding(
       padding: const EdgeInsets.only( left: 20, right: 20,bottom: 25),
       child: Container(
@@ -18,7 +21,7 @@ class PostItem extends StatelessWidget {
 
         child: Column(
           children: [
-            const Padding(
+              Padding(
               padding:   EdgeInsets.only(left: 15, top: 10),
               child: Row(
                 children: [
@@ -30,7 +33,7 @@ class PostItem extends StatelessWidget {
                     width: 20,
                   ),
                   Text(
-                    "Cristiano Ronaldo",
+                    "CR7",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -39,9 +42,9 @@ class PostItem extends StatelessWidget {
             Container(
                 alignment: Alignment.centerLeft,
                 padding:const EdgeInsets.only(top: 15,left: 15,bottom: 20),
-                child: const Column(crossAxisAlignment: CrossAxisAlignment.start,
+                child:   Column(crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Ronaldo is the best football player of all time suiiiii"),
+                    Text("SUIIIIIIIIIIIIIIIIIIIIIIIIIIII"),
                     SizedBox(height: 20,),
                   ],
                 )

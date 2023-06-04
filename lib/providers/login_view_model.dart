@@ -7,7 +7,7 @@ class LoginViewModel with ChangeNotifier {
   ApiService service = ApiService();
  User? userData;
 
-  void findUserByEmail(String uEmail) async {
+  Future<void> findUserByEmail(String uEmail) async {
     await service.getUserData();
     for (int i = 0; i < service.usersInfo.length; i++) {
       if (uEmail == service.usersInfo[i].email) {
@@ -16,7 +16,7 @@ class LoginViewModel with ChangeNotifier {
             secondName: service.usersInfo[i].secondName,
             email: service.usersInfo[i].email,
             imageUrl: service.usersInfo[i].imageUrl);
-
+        notifyListeners();
         break;
       }
     }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/home_view_model.dart';
 
 class Comments extends StatelessWidget {
-  const Comments({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Padding(
           padding: EdgeInsets.only(top: 50),

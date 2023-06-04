@@ -94,7 +94,7 @@ class Login extends StatelessWidget {
                        onPressed: () async{
                          if(myKey.currentState!.validate()){
                            if(await authViewModel.login(email.text.trim(), password.text.trim())){
-                            viewModel.findUserByEmail(email.text.trim());
+                            await viewModel.findUserByEmail(email.text.trim());
                             Navigator.pushReplacementNamed(context, "/bottom_navigation_bar");
                            }
                          }else{

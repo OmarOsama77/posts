@@ -69,7 +69,7 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = Provider.of<SettingViewModel>(context);
+
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
@@ -90,7 +90,7 @@ class Setting extends StatelessWidget {
               ),
                 Row(
                 children: [
-                Consumer<AuthenticationViewModel>(builder: (_,viewModel,__){
+                Consumer<SettingViewModel>(builder: (_,viewModel,__){
                   return   CircleAvatar(
                     radius: 35,
                     backgroundImage:AssetImage("images/s.jpg"),
@@ -99,13 +99,13 @@ class Setting extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Consumer<AuthenticationViewModel>(builder:(_,viewModel,__){
+                  Consumer<SettingViewModel>(builder:(_,viewModel,__){
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(viewModel.currentUser!.displayName.toString()),
-                        Text(viewModel.currentUser!.email.toString())
+                        Text("${viewModel.user!.firstName} ${viewModel.user!.secondName}"),
+                        Text(viewModel.user!.email)
                       ],
                     );
                   })
@@ -118,6 +118,12 @@ class Setting extends StatelessWidget {
                 "Account Information",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              settingItem((){
+
+              }, "My Profile", "See my posts", Icon(Icons.arrow_forward)),
               const SizedBox(
                 height: 20,
               ),
