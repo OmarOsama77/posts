@@ -17,6 +17,7 @@ import 'package:posts/screens/myPosts.dart';
 import 'package:posts/screens/navigation/bottom_navigation_bar.dart';
 import 'package:posts/screens/authentication_screens/signup.dart';
 import 'package:posts/screens/authentication_screens/splash_screen.dart';
+import 'package:posts/widgets/show_image.dart';
 import 'package:provider/provider.dart';
 
 import 'Api/api_service.dart';
@@ -66,7 +67,8 @@ class MyApp extends StatelessWidget {
            "/home":(_)=>Home(),
            "/bottom_navigation_bar":(_)=>BottomNavigationScreen(),
           "/comments":(_)=>Comments(),
-          "/myPosts":(_)=>MyPosts()
+          "/myPosts":(_)=>MyPosts(),
+          "/showImage":(_)=>ShowImage()
         },
       ),
     );

@@ -15,7 +15,7 @@ class ApiService{
         body: jsonEncode(bodyR)
     );
     print('status code  =  ${response.statusCode}');
-    print("object ${response.body}");
+
   }
 
 
@@ -39,7 +39,7 @@ class ApiService{
        final Map<String,dynamic> posts = jsonDecode(response.body);
        allPosts.clear();
        posts.forEach((key, value) {
-         final post = Post(userName: value["username"], title: value["title"], imageUrl: value["imageUrl"], comments: List<String>.from(value["comments"]));
+         final post = Post(userName: value["username"], title: value["title"], imageUrl: value["imageUrl"], comments: List<String>.from(value["comments"]),userImage: value["userImage"]);
          allPosts.add(post);
        });
        print("Retrived ${allPosts.length} posts");

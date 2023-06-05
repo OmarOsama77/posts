@@ -16,17 +16,17 @@ class UploadPostViewModel with ChangeNotifier{
   PickedFile? image;
   Uint8List? bytes;
   String? image64;
-  String? userImage;
+  String? postImage;
   Future<void> getImage()async{
     var picker = ImagePicker();
     image = await picker.getImage(source: ImageSource.gallery);
     notifyListeners();
   }
-  void uploadUserImage(){
+  void uploadPostImage(){
     if(image!.path.isNotEmpty){
       bytes = File(image!.path).readAsBytesSync();
       image64 = base64Encode(bytes!);
-      userImage=image64!;
+      postImage=image64!;
     }else{
       if(kDebugMode){
         print("null");
@@ -42,13 +42,15 @@ class UploadPostViewModel with ChangeNotifier{
     return true;
   }
 PostsViewModel postsViewModel = PostsViewModel();
-  void sendPost (String userName,String title,String imageUrl,List<String> comments)  {
+  void sendPost (String userName,String title,String imageUrl,List<String> comments,String userImage)  {
     service.uploadPost(
         post: Post(
             userName: userName,
             title: title,
             imageUrl: imageUrl,
-            comments: comments)
+            comments: comments,
+            userImage: userImage
+        )
     );
 
 

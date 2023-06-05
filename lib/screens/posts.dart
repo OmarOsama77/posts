@@ -89,14 +89,11 @@ class AddPost extends StatelessWidget {
                         width: 350,
                         child: ElevatedButton(
                           onPressed: ()async {
+                            print("omar  ${viewModel.user!.imageUrl}" );
                               if(viewModel.isThereImage()){
-                                viewModel.uploadUserImage();
-                                  viewModel.sendPost(auth.currentUser!.displayName.toString(), title.text, viewModel.userImage.toString(), ["comment 1","comment 2"]);
-                                    try{
-                                     postsViewModel.addPost(auth.currentUser!.displayName.toString(),title.text, viewModel.userImage.toString(),["comment 1","comment 2"]);
-                                    }catch(e){
-                                      print('there is error');
-                            }
+                                viewModel.uploadPostImage();
+                                  viewModel.sendPost("${viewModel.user!.firstName} ${viewModel.user!.secondName}", title.text, viewModel.postImage.toString(), ["comment 1","comment 2"],viewModel.user!.imageUrl);
+                                  Fluttertoast.showToast(msg: "Post uploaded");
                               }else{
                                 Fluttertoast.showToast(msg: "Please try again");
                               }
