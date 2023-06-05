@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:posts/models/post.dart';
+import 'package:posts/providers/posts_view_model.dart';
 import 'package:posts/providers/upload_post_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +16,7 @@ class AddPost extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthenticationViewModel auth = AuthenticationViewModel();
     TextEditingController title = TextEditingController();
-
+    PostsViewModel postsViewModel = PostsViewModel();
     return  Scaffold(
        body:
         SingleChildScrollView(
@@ -90,6 +92,11 @@ class AddPost extends StatelessWidget {
                               if(viewModel.isThereImage()){
                                 viewModel.uploadUserImage();
                                   viewModel.sendPost(auth.currentUser!.displayName.toString(), title.text, viewModel.userImage.toString(), ["comment 1","comment 2"]);
+                                    try{
+                                     postsViewModel.addPost(auth.currentUser!.displayName.toString(),title.text, viewModel.userImage.toString(),["comment 1","comment 2"]);
+                                    }catch(e){
+                                      print('there is error');
+                            }
                               }else{
                                 Fluttertoast.showToast(msg: "Please try again");
                               }

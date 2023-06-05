@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:posts/providers/home_view_model.dart';
+import 'package:posts/providers/posts_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/comments.dart';
@@ -9,7 +10,7 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<HomeViewModel>(context,listen: false);
+
         return Padding(
       padding: const EdgeInsets.only( left: 20, right: 20,bottom: 25),
       child: Container(
@@ -32,22 +33,24 @@ class PostItem extends StatelessWidget {
                   SizedBox(
                     width: 20,
                   ),
-                  Text(
-                    "CR7",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+
+                       Text("CR7"),
+
                 ],
               ),
             ),
             Container(
                 alignment: Alignment.centerLeft,
                 padding:const EdgeInsets.only(top: 15,left: 15,bottom: 20),
-                child:   Column(crossAxisAlignment: CrossAxisAlignment.start,
+                child:
+
+                   Column(crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("SUIIIIIIIIIIIIIIIIIIIIIIIIIIII"),
+                    Text("Simply the best"),
                     SizedBox(height: 20,),
                   ],
                 )
+              ,
             ),
             Container(
               width: double.infinity,

@@ -5,9 +5,9 @@ import '../models/user.dart';
 
 class LoginViewModel with ChangeNotifier {
   ApiService service = ApiService();
- User? userData;
+   User? userData;
 
-  Future<void> findUserByEmail(String uEmail) async {
+  Future <void> findUserByEmail(String uEmail) async {
     await service.getUserData();
     for (int i = 0; i < service.usersInfo.length; i++) {
       if (uEmail == service.usersInfo[i].email) {
@@ -17,9 +17,13 @@ class LoginViewModel with ChangeNotifier {
             email: service.usersInfo[i].email,
             imageUrl: service.usersInfo[i].imageUrl);
         notifyListeners();
-        break;
+
+      break;
+      }else{
+        throw FormatException("Error ya man");
+
       }
     }
-  }
 
+  }
 }

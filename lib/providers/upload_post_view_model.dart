@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:posts/Api/api_service.dart';
 import 'package:posts/models/post.dart';
 import 'package:posts/models/user.dart';
+import 'package:posts/providers/posts_view_model.dart';
 
 class UploadPostViewModel with ChangeNotifier{
   User? user;
@@ -40,7 +41,7 @@ class UploadPostViewModel with ChangeNotifier{
     }
     return true;
   }
-
+PostsViewModel postsViewModel = PostsViewModel();
   void sendPost (String userName,String title,String imageUrl,List<String> comments)  {
     service.uploadPost(
         post: Post(
@@ -49,6 +50,8 @@ class UploadPostViewModel with ChangeNotifier{
             imageUrl: imageUrl,
             comments: comments)
     );
+
+
 
   }
 }

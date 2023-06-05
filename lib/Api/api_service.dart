@@ -60,7 +60,7 @@ class ApiService{
         final userData =User(firstName: value["firstName"], secondName: value["secondName"], email: value["email"], imageUrl: value["imageUrl"]);
         usersInfo.add(userData);
       });
-      print("object ${usersInfo}");
+      print("Accounts ${usersInfo}");
       print("got ${usersInfo.length} users");
       return usersInfo;
     }catch(e){

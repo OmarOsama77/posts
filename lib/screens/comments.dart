@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:posts/providers/posts_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/home_view_model.dart';
 
 class Comments extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,30 +30,33 @@ class Comments extends StatelessWidget {
                 ],
               ),
                 Expanded(child:
-                ListView.builder(
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(top: 20, left: 15),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage: AssetImage("images/ronaldo.jpg"),
-                            ),
-                            SizedBox(width: 15,),
-                            Column(crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Cristiano Ronaldo",
-                                  style: TextStyle(fontSize: 15),),
-                                Text("The best in the world",
-                                    style: TextStyle(fontSize: 15))
-                              ],
-                            )
-                          ],
-                        ),
-                      );
-                    })),
+
+                    ListView.builder(
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.only(top: 20, left: 15),
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 30,
+                                backgroundImage: AssetImage("images/ronaldo.jpg"),
+                              ),
+                              SizedBox(width: 15,),
+                              Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Cristiano Ronaldo",
+                                    style: TextStyle(fontSize: 15),),
+                                  Text("The best in the world",
+                                      style: TextStyle(fontSize: 15))
+                                ],
+                              )
+                            ],
+                          ),
+                        );
+                      })
+                ,
+                ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 20),
                   child:Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
