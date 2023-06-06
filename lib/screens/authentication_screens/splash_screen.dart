@@ -26,11 +26,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     final viewModel = Provider.of<LoginViewModel>(context,listen: false);
     final viewModel2 = Provider.of<SplashViewModel>(context,listen: false);
-
-      viewModel.findUserByEmail(viewModel2.currentUser!.email.toString());
-
-
-
       viewModel2.nav2(context);
 
 

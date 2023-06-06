@@ -17,10 +17,9 @@ class LoginViewModel with ChangeNotifier {
             email: service.usersInfo[i].email,
             imageUrl: service.usersInfo[i].imageUrl);
         notifyListeners();
-
       break;
       }else{
-        throw FormatException("Error ya man");
+         print("not found");
 
       }
     }

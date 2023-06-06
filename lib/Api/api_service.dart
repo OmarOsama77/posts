@@ -1,5 +1,6 @@
 import 'package:http/http.dart'as http;
 import 'package:posts/Api/api_constants.dart';
+import 'package:posts/models/commets.dart';
 import 'package:posts/models/post.dart';
 import 'dart:convert';
 import 'package:posts/models/user.dart';
@@ -31,6 +32,18 @@ class ApiService{
 
   }
 
+  Future<void> uploadComment(String postId)async{
+      final response =await http.put(Uri.parse("https://${ApiConstants.BaseUrl}/Posts/$postId/comments.json"),
+
+    body: jsonEncode({
+
+       "comment":"dsa"
+    }
+    )
+    );
+print("Hello ${response.statusCode}");
+    }
+
     List<Post> allPosts=[];
     Future<List<Post>> getPosts ()async{
      try{
@@ -39,7 +52,8 @@ class ApiService{
        final Map<String,dynamic> posts = jsonDecode(response.body);
        allPosts.clear();
        posts.forEach((key, value) {
-         final post = Post(userName: value["username"], title: value["title"], imageUrl: value["imageUrl"], comments: List<String>.from(value["comments"]),userImage: value["userImage"]);
+
+        final post = Post(id: key,userName: value["username"], title: value["title"], imageUrl: value["imageUrl"], comments:[],userImage: value["userImage"]);
          allPosts.add(post);
        });
        print("Retrived ${allPosts.length} posts");
@@ -68,6 +82,7 @@ class ApiService{
     }
     return [];
    }
+
 
 
 }

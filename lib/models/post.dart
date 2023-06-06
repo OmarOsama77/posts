@@ -1,8 +1,11 @@
+import 'package:posts/models/commets.dart';
+
 class Post{
+ late String? id;
  late String userName;
  late String title;
  late String imageUrl;
- late List<String> comments;
+ List<Comment>? comments;
  late String userImage;
 
   Post({
@@ -10,7 +13,8 @@ class Post{
     required this.title,
     required this.imageUrl,
     required this.comments,
-    required this.userImage
+    required this.userImage,
+     this.id,
   });
 
    Map<String,dynamic>toMap(){
@@ -19,7 +23,8 @@ class Post{
        "title":title,
        "imageUrl":imageUrl,
        "comments":comments,
-        "userImage":userImage
+        "userImage":userImage,
+        "PostId":id
      };
    }
 

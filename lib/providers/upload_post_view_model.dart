@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:posts/Api/api_service.dart';
+import 'package:posts/models/commets.dart';
 import 'package:posts/models/post.dart';
 import 'package:posts/models/user.dart';
 import 'package:posts/providers/posts_view_model.dart';
@@ -41,15 +42,16 @@ class UploadPostViewModel with ChangeNotifier{
     }
     return true;
   }
+
 PostsViewModel postsViewModel = PostsViewModel();
-  void sendPost (String userName,String title,String imageUrl,List<String> comments,String userImage)  {
+  void sendPost (String userName,String title,String imageUrl,List<Comment> comment,String userImage)  {
     service.uploadPost(
         post: Post(
             userName: userName,
             title: title,
             imageUrl: imageUrl,
-            comments: comments,
-            userImage: userImage
+            comments: comment,
+            userImage: userImage,
         )
     );
 

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:posts/providers/posts_view_model.dart';
+import 'package:posts/providers/comments_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/home_view_model.dart';
+import '../models/commets.dart';
 
 class Comments extends StatelessWidget {
 
-
   @override
   Widget build(BuildContext context) {
+  var data = ModalRoute.of(context)!.settings.arguments as Map<String , String>;
+  String postId = data["postId"].toString();
 
     return Scaffold(
       body: Padding(
@@ -30,7 +31,6 @@ class Comments extends StatelessWidget {
                 ],
               ),
                 Expanded(child:
-
                     ListView.builder(
                       itemCount: 5,
                       itemBuilder: (context, index) {
@@ -62,9 +62,14 @@ class Comments extends StatelessWidget {
                   child:Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                        Expanded(child: TextField()),
-                      IconButton(onPressed: (){
+                      Consumer<CommentsViewModel>(builder: (_,viewModel,__){
+                        return IconButton(onPressed: (){
+                          List<Comment> arr =[
 
-                      }, icon: Icon(Icons.arrow_upward))
+                          ];
+                            viewModel.addComment(postId);
+                        }, icon: Icon(Icons.arrow_upward));
+                      },)
                     ],
                   ),
                 )

@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:posts/models/commets.dart';
 import 'package:posts/models/post.dart';
 import 'package:posts/providers/posts_view_model.dart';
 import 'package:posts/providers/upload_post_view_model.dart';
@@ -14,9 +17,7 @@ class AddPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthenticationViewModel auth = AuthenticationViewModel();
     TextEditingController title = TextEditingController();
-    PostsViewModel postsViewModel = PostsViewModel();
     return  Scaffold(
        body:
         SingleChildScrollView(
@@ -34,7 +35,7 @@ class AddPost extends StatelessWidget {
                      children: [
                        CircleAvatar(
                          radius: 30,
-                         backgroundImage: AssetImage("images/ronaldo.jpg"),
+                         backgroundImage:MemoryImage(base64Decode(viewModel.user!.imageUrl) as Uint8List ),
                        ),
                        SizedBox(width: 10,),
                        Text("${viewModel.user!.firstName} ${viewModel.user!.secondName}"),
@@ -92,7 +93,7 @@ class AddPost extends StatelessWidget {
                             print("omar  ${viewModel.user!.imageUrl}" );
                               if(viewModel.isThereImage()){
                                 viewModel.uploadPostImage();
-                                  viewModel.sendPost("${viewModel.user!.firstName} ${viewModel.user!.secondName}", title.text, viewModel.postImage.toString(), ["comment 1","comment 2"],viewModel.user!.imageUrl);
+                                  viewModel.sendPost("${viewModel.user!.firstName} ${viewModel.user!.secondName}", title.text, viewModel.postImage.toString(), [] , viewModel.user!.imageUrl);
                                   Fluttertoast.showToast(msg: "Post uploaded");
                               }else{
                                 Fluttertoast.showToast(msg: "Please try again");

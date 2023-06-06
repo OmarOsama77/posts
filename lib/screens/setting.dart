@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -91,9 +94,9 @@ class Setting extends StatelessWidget {
                 Row(
                 children: [
                 Consumer<SettingViewModel>(builder: (_,viewModel,__){
-                  return   CircleAvatar(
+                  return CircleAvatar(
                     radius: 35,
-                    backgroundImage:AssetImage("images/s.jpg"),
+                    backgroundImage:MemoryImage(base64Decode(viewModel.user!.imageUrl) as Uint8List ),
                   );
                 }),
                   SizedBox(

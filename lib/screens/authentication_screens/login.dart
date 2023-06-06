@@ -99,7 +99,6 @@ class Login extends StatelessWidget {
 
                            }
                          }else{
-
                            Fluttertoast.showToast(msg: "Error");
                          }
                        },

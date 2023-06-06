@@ -14,16 +14,17 @@ String userName;
 String title;
 String image;
 String userImage;
+String id;
 
 
 PostItem({
   required this.userName,
   required this.title,
   required this.userImage,
-  required this.image});
+  required this.image,
+  required this.id});
   @override
   Widget build(BuildContext context) {
-
         return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20,bottom: 25),
       child: Container(
@@ -76,7 +77,7 @@ PostItem({
               ),
             ),
              TextButton(onPressed: (){
-               Navigator.pushNamed(context, "/comments");
+               Navigator.pushNamed(context, "/comments",arguments: {"postId":id});
              }, child: Text("Comments",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black),)),
           ],
         ),

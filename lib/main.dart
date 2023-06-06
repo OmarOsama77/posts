@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:posts/providers/authentication_view_model.dart';
 import 'package:posts/providers/bottom_nav_bar_provider.dart';
+import 'package:posts/providers/comments_view_model.dart';
 import 'package:posts/providers/home_view_model.dart';
 import 'package:posts/providers/login_view_model.dart';
 import 'package:posts/providers/posts_view_model.dart';
@@ -37,7 +38,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create:(_)=>NavigationProvider()),
-
         ChangeNotifierProvider(create:(_)=>SignupViewModel(ApiService())),
         ChangeNotifierProvider(create:(_)=>AuthenticationViewModel()),
         ChangeNotifierProvider(create:(_)=>SplashViewModel()),
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
           return SettingViewModel(loginViewModel.userData);
         }),
        ChangeNotifierProvider(create:(_)=>PostsViewModel()),
-
+        ChangeNotifierProvider(create:(_)=>CommentsViewModel()),
 
 
 

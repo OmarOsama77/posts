@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
 
  data.fetchPosts();
     return Scaffold(
-      body:  data.posts.length==0? Center(child: Text("There is no posts"),):
+      body:
       SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -58,6 +58,7 @@ class Home extends StatelessWidget {
                        image: viewModel.posts[index].imageUrl,
                        userName:viewModel.posts[index].userName,
                        userImage: viewModel.posts[index].userImage,
+                       id: viewModel.posts[index].id.toString(),
                      );
                    });
              })
