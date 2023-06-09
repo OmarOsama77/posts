@@ -18,7 +18,6 @@ class User{
           "secondName":secondName,
           "email":email,
           "imageUrl":imageUrl,
-
         };
       }
 }

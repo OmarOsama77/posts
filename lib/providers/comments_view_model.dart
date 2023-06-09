@@ -1,12 +1,40 @@
 
 import 'package:flutter/material.dart';
 import 'package:posts/Api/api_service.dart';
-
+import 'package:uuid/uuid.dart';
 import '../models/commets.dart';
+import '../models/user.dart';
 
 class CommentsViewModel with ChangeNotifier{
+  User? user;
+
+  CommentsViewModel(this.user);
+
   ApiService service = ApiService();
-  void addComment(String postId){
-      service.uploadComment(postId);
-}
+
+
+ String generateCommentId(){
+   var uuid = Uuid();
+   return uuid.v4();
+ }
+
+  void addComment(String postId,Comment comment){
+      service.uploadComment(postId, comment);
+  }
+  List<Comment> comments=[];
+
+
+
+  Future<List<Comment>> getComments(String postId) async{
+    service.allComments.clear();
+    comments.clear();
+    await service.getComments(postId);
+    for(int i=0;i<service.allComments.length;i++){
+      comments.add(service.allComments[i]);
+    }
+  notifyListeners();
+    print("comment length ${comments.length}");
+    return comments;
+  }
+
 }

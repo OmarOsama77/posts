@@ -52,7 +52,9 @@ class MyApp extends StatelessWidget {
           return SettingViewModel(loginViewModel.userData);
         }),
        ChangeNotifierProvider(create:(_)=>PostsViewModel()),
-        ChangeNotifierProvider(create:(_)=>CommentsViewModel()),
+        ChangeNotifierProxyProvider<LoginViewModel,CommentsViewModel>(create: (_)=>CommentsViewModel(null), update: (context,loginViewModel,commentsViewModel){
+          return CommentsViewModel(loginViewModel.userData);
+        }),
 
 
 

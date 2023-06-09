@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:posts/models/user.dart';
+import 'package:uuid/uuid.dart';
 import '../Api/api_service.dart';
 
 class SignupViewModel with ChangeNotifier{
@@ -49,7 +50,8 @@ class SignupViewModel with ChangeNotifier{
 
 
   void uploadUserData(String firstName , String secondName , String email,String imageUrl){
-    service.register(user: User(firstName: firstName, secondName: secondName, email: email, imageUrl: imageUrl,));
+    service.register(user: User(firstName: firstName, secondName: secondName, email: email, imageUrl: imageUrl ));
   }
+
 
 }

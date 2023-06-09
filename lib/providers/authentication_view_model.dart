@@ -40,14 +40,7 @@ class AuthenticationViewModel with ChangeNotifier{
    Stream get authStateChanges {
      return firebaseAuth.authStateChanges();
    }
-   Future <bool> deleteAccount (String email)async{
-    try{
-      await firebaseAuth.sendPasswordResetEmail(email: email);
-      return true;
-    }catch(e){
-      return false;
-    }
-   }
+
    Future<void> addUserImage(String userImage)async{
      try{
        await currentUser!.updatePhotoURL(userImage);
@@ -55,6 +48,13 @@ class AuthenticationViewModel with ChangeNotifier{
        print("error $e");
      }
 
+   }
+   Future<void> updatePassword(String newPassword)async{
+   await firebaseAuth.currentUser!.updatePassword(newPassword);
+
+   }
+   Future<void> deleteAccount()async{
+     await firebaseAuth.currentUser!.delete();
    }
 
 }

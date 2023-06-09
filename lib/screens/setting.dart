@@ -10,41 +10,46 @@ import '../providers/settings_provider.dart';
 class Setting extends StatelessWidget {
   const Setting({Key? key}) : super(key: key);
 
-  Widget textField(String hintText) {
+  Widget textField(String hintText,TextEditingController controller) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(hintText: hintText),
     );
   }
 
-  void passwordDialog(BuildContext context) {
+  void passwordDialog(Function onClick,BuildContext context,TextEditingController controller2 , TextEditingController controller3) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: const Text("Change Password"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  textField("Old Password"),
-                  textField("New Password"),
-                  textField("Confirm Password"),
-                ],
-              ),
-              actions: [
-                ElevatedButton(onPressed: () {}, child: const Text("submit"))
-              ],
-            ));
+          title: const Text("Change Password"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              textField("New Password",controller2),
+              textField("Confirm Password",controller3),
+            ],
+          ),
+          actions: [
+            ElevatedButton(onPressed: () {
+              onClick();
+            }, child: const Text("submit"))
+          ],
+        ));
   }
 
-  void showDialogg(BuildContext context, String title, String hintText) {
+  void showDialogg(BuildContext context, String title, String hintText,Function onClick,TextEditingController controller) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text(title),
-              content: textField(hintText),
-              actions: [
-                ElevatedButton(onPressed: () {}, child: const Text("Submit"))
-              ],
-            ));
+          title: Text(title),
+          content: textField(hintText,controller),
+          actions: [
+            ElevatedButton(onPressed: () {
+              onClick();
+
+                    }, child: const Text("Submit"))
+          ],
+        ));
   }
 
   Widget settingItem(onPreased(), String t1, String t2, Icon icon) {
@@ -72,100 +77,111 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController firstName = TextEditingController();
+    TextEditingController secondName = TextEditingController();
 
+    TextEditingController newPass = TextEditingController();
+    TextEditingController confPass = TextEditingController();
+   var viewModel = Provider.of<SettingViewModel>(context);
     return Scaffold(
         body: SafeArea(
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.only(top: 50, left: 25, right: 25),
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Center(
-                  child: Text(
-                "Settings",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              )),
-              const SizedBox(
-                height: 12,
-              ),
-                Row(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.only(top: 50, left: 25, right: 25),
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                Consumer<SettingViewModel>(builder: (_,viewModel,__){
-                  return CircleAvatar(
-                    radius: 35,
-                    backgroundImage:MemoryImage(base64Decode(viewModel.user!.imageUrl) as Uint8List ),
-                  );
-                }),
-                  SizedBox(
-                    width: 10,
+                  const Center(
+                      child: Text(
+                        "Settings",
+                        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      )),
+                  const SizedBox(
+                    height: 12,
                   ),
-                  Consumer<SettingViewModel>(builder:(_,viewModel,__){
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text("${viewModel.user!.firstName} ${viewModel.user!.secondName}"),
-                        Text(viewModel.user!.email)
-                      ],
-                    );
-                  })
-                ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const Text(
-                "Account Information",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              settingItem((){
+                  Row(
+                    children: [
+                      Consumer<SettingViewModel>(builder: (_,viewModel,__){
+                        return CircleAvatar(
+                          radius: 35,
+                          backgroundImage:MemoryImage(base64Decode(viewModel.user!.imageUrl) as Uint8List ),
+                        );
+                      }),
+                      SizedBox(
+                        width: 10,
+                      ),
 
-              }, "My Profile", "See my posts", Icon(Icons.arrow_forward)),
-              const SizedBox(
-                height: 20,
-              ),
-              settingItem(() {
-                showDialogg(context, "First Name", "Enter your first name");
-              }, "First Name", "Change your first name",
-                  const Icon(Icons.arrow_forward)),
-              const SizedBox(
-                height: 20,
-              ),
-              settingItem(() {
-                showDialogg(context, "Second Name", "Enter your second name");
-              }, "Second Name", "Change your Second name",
-                  const Icon(Icons.arrow_forward)),
-              const SizedBox(
-                height: 20,
-              ),
-              settingItem(() {
-                passwordDialog(context);
-              }, "Password", "Change your password",
-                  const Icon(Icons.arrow_forward)),
-              const SizedBox(
-                height: 20,
-              ),
-            Consumer<AuthenticationViewModel>(builder:(_,viewModel,__){
-              return  settingItem(()async{
-                 if(await viewModel.signOut()){
-                   Navigator.pushReplacementNamed(context, "/login");
-                 }
-              }, "Logout", "Logout from your account",
-                  const Icon(Icons.logout));
-            }),
-              const SizedBox(
-                height: 20,
-              ),
-              settingItem(() {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
+                          Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text("${viewModel.user!.firstName} ${viewModel.user!.secondName}"),
+                            Text(viewModel.user!.email)
+                          ],
+
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  const Text(
+                    "Account Information",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  settingItem((){
+
+                  }, "My Profile", "See my posts", Icon(Icons.arrow_forward)),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  settingItem(() {
+                    showDialogg(context, "First Name", "Enter your first name",(){
+                      viewModel.updataFirstName("firstName", firstName.text);
+                },firstName);
+                  }, "First Name", "Change your first name",
+                      const Icon(Icons.arrow_forward)),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  settingItem(() {
+                    showDialogg(context, "Second Name", "Enter your second name",(){
+                      viewModel.updataSecondName("secondName", secondName.text);
+                },secondName);
+                  }, "Second Name", "Change your Second name",
+                      const Icon(Icons.arrow_forward)),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  settingItem(() {
+                    passwordDialog((){
+                      viewModel.changePassword(newPass.text.trim(), confPass.text.trim());
+                    },context,newPass,confPass);
+                  }, "Password", "Change your password",
+                      const Icon(Icons.arrow_forward)),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Consumer<AuthenticationViewModel>(builder:(_,viewModel,__){
+                    return  settingItem(()async{
+                      if(await viewModel.signOut()){
+                        Navigator.pushReplacementNamed(context, "/login");
+                      }
+                    }, "Logout", "Logout from your account",
+                        const Icon(Icons.logout));
+                  }),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  settingItem(() {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
                           title: const Text("Delete account"),
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -174,13 +190,19 @@ class Setting extends StatelessWidget {
                                   "Are you sure you want to delete your account"),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
                                       child: const Text("Cancel")),
                                   ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      viewModel.deleteAccount();
+
+                                      Navigator.pushReplacementNamed(context, "/login");
+                                    },
                                     child: const Text("Yes"),
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.red),
@@ -190,12 +212,12 @@ class Setting extends StatelessWidget {
                             ],
                           ),
                         ));
-              }, "Delete account !", "Delete your account ",
-                  const Icon(Icons.delete)),
-            ],
+                  }, "Delete account !", "Delete your account ",
+                      const Icon(Icons.delete)),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 }
