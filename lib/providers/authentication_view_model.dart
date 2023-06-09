@@ -56,5 +56,7 @@ class AuthenticationViewModel with ChangeNotifier{
    Future<void> deleteAccount()async{
      await firebaseAuth.currentUser!.delete();
    }
-
+   Future<void>forgetPass(String email)async{
+    await firebaseAuth.sendPasswordResetEmail(email: email);
+   }
 }

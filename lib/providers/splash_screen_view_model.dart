@@ -1,4 +1,5 @@
 import 'dart:async';
+import '../models/user.dart'as Userr;
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:posts/Api/api_service.dart';
@@ -28,5 +29,17 @@ class SplashViewModel with ChangeNotifier {
 
   LoginViewModel loginViewModel = LoginViewModel();
 
+   // Future<bool> autoLogin()async{
+   //   if(currentUser!=null){
+   //     try{
+   //       await loginViewModel.findUserByEmail(currentUser!.email.toString());
+   //       return true;
+   //     }catch(e){
+   //       return false;
+   //     }
+   //   }else{
+   //     return false;
+   //   }
+   // }
 
 }

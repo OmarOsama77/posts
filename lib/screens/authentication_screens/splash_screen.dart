@@ -14,36 +14,34 @@ import '../../providers/splash_screen_view_model.dart';
 
 
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget{
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    final viewModel = Provider.of<LoginViewModel>(context,listen: false);
-    final viewModel2 = Provider.of<SplashViewModel>(context,listen: false);
-      viewModel2.nav2(context);
-
-
-  }
   @override
   Widget build(BuildContext context) {
+    var viewModel = Provider.of<LoginViewModel>(context,listen: false);
+    var viewModel2 = Provider.of<SplashViewModel>(context,listen: true);
+viewModel2.nav2(context);
     return Scaffold(
         body:
 
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.white70
+                  ),
+                  child:Lottie.asset("assets/lottie_splash2.json"),
 
-        Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-              color: Colors.white70
-          ),
-          child:Lottie.asset("assets/lottie_splash2.json"),
-        )
+                )
+
+        // Container(
+        //   width: double.infinity,
+        //   height: double.infinity,
+        //   decoration: BoxDecoration(
+        //       color: Colors.white70
+        //   ),
+        //   child:Lottie.asset("assets/lottie_splash2.json"),
+        // )
 
     );
   }

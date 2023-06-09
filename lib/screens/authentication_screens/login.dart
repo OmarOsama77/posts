@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:posts/providers/authentication_view_model.dart';
@@ -10,7 +12,27 @@ class Login extends StatelessWidget {
   Login({super.key});
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController forgotPass = TextEditingController();
+  void showForgetPassDialog(BuildContext context, Function onClick,TextEditingController controller) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Forgot your password"),
+          content: TextField(
+            controller: controller,
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecoration(
+              hintText: "Email Address"
+            ),
+          ),
+          actions: [
+            ElevatedButton(onPressed: () {
+              onClick();
 
+            }, child: const Text("Submit"))
+          ],
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,8 +100,11 @@ class Login extends StatelessWidget {
                 Row(mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(onPressed: (){
-
-                    }, child: Text("Forgot Passowrd ? "))
+                      showForgetPassDialog(context, (){
+                        authViewModel.forgetPass(forgotPass.text.trim());
+                        Fluttertoast.showToast(msg: "Please check your email");
+                      }, forgotPass);
+                    }, child: const Text("Forgot Passowrd ?"))
                   ],
                 ),
                 const SizedBox(height: 15,),

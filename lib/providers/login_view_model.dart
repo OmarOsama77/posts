@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:posts/Api/api_service.dart';
+import 'package:posts/providers/authentication_view_model.dart';
 
 import '../models/user.dart';
 
 class LoginViewModel with ChangeNotifier {
   ApiService service = ApiService();
+  AuthenticationViewModel authVM = AuthenticationViewModel();
    User? userData;
 
-  Future <void> findUserByEmail(String uEmail) async {
+  Future<User?> findUserByEmail(String uEmail) async {
     service.usersInfo.clear();
     await service.getUserData();
     for (int i = 0; i < service.usersInfo.length; i++) {
@@ -18,13 +21,19 @@ class LoginViewModel with ChangeNotifier {
             secondName: service.usersInfo[i].secondName,
             email: service.usersInfo[i].email,
             imageUrl: service.usersInfo[i].imageUrl);
+
       notifyListeners();
+        print('User data ${userData!.email}');
+        return userData;
         break;
       }else{
-        print('User not found');
+        throw Exception("Can't find user");
       }
       }
     }
 
+  void forgotPass(String email){
+    authVM.forgetPass(email);
 
+  }
 }
