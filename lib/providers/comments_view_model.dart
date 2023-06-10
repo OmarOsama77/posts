@@ -22,19 +22,14 @@ class CommentsViewModel with ChangeNotifier{
       service.uploadComment(postId, comment);
   }
   List<Comment> comments=[];
+  Future<List<Comment>> fetchComments(String postId) async {
 
+      final retrievedComments = await service.getComments(postId);
+      comments = retrievedComments;
+      notifyListeners();
+      print('sd ${comments.length}');
 
-
-  Future<List<Comment>> getComments(String postId) async{
-    service.allComments.clear();
-    comments.clear();
-    await service.getComments(postId);
-    for(int i=0;i<service.allComments.length;i++){
-      comments.add(service.allComments[i]);
-    }
-  notifyListeners();
-    print("comment length ${comments.length}");
-    return comments;
+       return comments;
   }
-
 }
+

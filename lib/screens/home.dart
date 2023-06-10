@@ -15,7 +15,6 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
  var data = Provider.of<PostsViewModel>(context,listen: false);
-
  data.fetchPosts();
     return Scaffold(
       body:

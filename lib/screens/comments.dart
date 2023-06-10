@@ -1,3 +1,7 @@
+
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:posts/Api/api_service.dart';
 import 'package:provider/provider.dart';
@@ -5,18 +9,17 @@ import 'package:provider/provider.dart';
 import '../models/commets.dart';
 import '../providers/comments_view_model.dart';
 
+
 class Comments extends StatelessWidget {
   TextEditingController title = TextEditingController();
 
-  @override
   Widget build(BuildContext context) {
     var data = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     String postId = data["postId"].toString();
-    List<Comment> comment = [];
-    var viewModel = Provider.of<CommentsViewModel>(context,listen: true);
-   viewModel.getComments(postId) ;
-    print('object ${viewModel.comments.length}');
-    print("co ${comment.length}");
+    var viewModel = Provider.of<CommentsViewModel>(context,listen: false);
+    viewModel.comments.clear();
+
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: 50),
@@ -45,40 +48,52 @@ class Comments extends StatelessWidget {
                 ],
               ),
               Expanded(
-                child: Consumer<CommentsViewModel>(builder: (_, viewModel, __){
+                child:
+                FutureBuilder(
+                    future: viewModel.fetchComments(postId),
+                    builder:(context,snapshot){
+                  return Consumer<CommentsViewModel>(builder: (_, viewModel, __){
 
-                  return ListView.builder(
-                    itemCount:viewModel.comments.length,
-                    itemBuilder: (context, index) {
+                   if(snapshot.hasData){
+                     return ListView.builder(
+                       itemCount:viewModel.comments.length,
+                       itemBuilder: (context, index) {
+                         return Padding(
+                           padding: EdgeInsets.only(top: 20, left: 15),
+                           child: Row(
+                             children: [
+                               CircleAvatar(
+                                 radius: 30,
+                                 backgroundImage:MemoryImage(base64Decode(viewModel.comments[index].userImage.toString()) as Uint8List ),
+                               ),
+                               SizedBox(width: 15),
+                               Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   Text(
+                                     viewModel.comments[index]!.userName.toString(),
+                                     style: TextStyle(fontSize: 15),
+                                   ),
+                                   Text(
+                                     viewModel.comments[index]!.title.toString(),
+                                     style: TextStyle(fontSize: 15),
+                                   ),
+                                 ],
+                               ),
+                             ],
+                           ),
+                         );
+                       },
+                     );
 
-                      return Padding(
-                        padding: EdgeInsets.only(top: 20, left: 15),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage: AssetImage("images/ronaldo.jpg"),
-                            ),
-                            SizedBox(width: 15),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "comment.userName",
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                Text(
-                                  "comment.title",
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                }),
+                   }
+
+
+                   else {
+                     return Center(child: CircularProgressIndicator());
+                   }
+                  });
+                })
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 20),

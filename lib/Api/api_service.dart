@@ -68,9 +68,10 @@ print("Hello ${response.statusCode}");
         print("succes getting comments ${allComments.length}");
         return allComments;
       }catch(e){
-        print('Error in comments $e');
+          return [];
+        print('Error in comments ');
     }
-    return [];
+
     }
 
     List<Post> allPosts=[];
@@ -121,6 +122,9 @@ print("Hello ${response.statusCode}");
 
     final response =await http.delete(Uri.parse("https://${ApiConstants.BaseUrl}/users/$userId.json"));
       print('Delete user data ${response.statusCode}');
+
+
+
     }
 
 }

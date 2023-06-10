@@ -64,8 +64,11 @@ class AddPost extends StatelessWidget {
                               child: Container(
                                 width: 280,
                                 height: 220,
-                                color: Color.fromRGBO(200, 200, 200, 1.0),
-                                child: Center(child: Text("Upload Image"),),
+                                // color: Color.fromRGBO(200, 200, 200, 1.0),
+                                child: Center(child: Text("Click here to  Upload Image"),),
+                                decoration: BoxDecoration(
+
+                                ),
                               ),
                               onTap: (){
                                 viewModel.getImage();
