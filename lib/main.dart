@@ -6,6 +6,7 @@ import 'package:posts/providers/bottom_nav_bar_provider.dart';
 import 'package:posts/providers/comments_view_model.dart';
 import 'package:posts/providers/home_view_model.dart';
 import 'package:posts/providers/login_view_model.dart';
+import 'package:posts/providers/my_posts_view_model.dart';
 import 'package:posts/providers/posts_view_model.dart';
 import 'package:posts/providers/settings_provider.dart';
 import 'package:posts/providers/signup_view_model.dart';
@@ -55,8 +56,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<LoginViewModel,CommentsViewModel>(create: (_)=>CommentsViewModel(null), update: (context,loginViewModel,commentsViewModel){
           return CommentsViewModel(loginViewModel.userData);
         }),
-
-
+        // ChangeNotifierProvider(create:(_)=>MyPostsViewModel()),
+        ChangeNotifierProxyProvider<LoginViewModel,MyPostsViewModel>(create: (_)=>MyPostsViewModel(null), update: (context,loginViewModel,myPostsViewModel){
+          return MyPostsViewModel(loginViewModel.userData);
+        }),
 
 
       ],

@@ -9,9 +9,11 @@ class PostsViewModel with ChangeNotifier{
  ApiService apiService = ApiService();
   List<Post> posts=[];
   Future<List<Post>> fetchPosts()async{
+    posts.clear();
   await  apiService.getPosts();
     posts = apiService.allPosts;
-notifyListeners();
+    print('sd${apiService.allPosts.length}');
+    notifyListeners();
   print("post ${posts.length}");
    return posts;
   }

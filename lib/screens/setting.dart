@@ -135,7 +135,7 @@ class Setting extends StatelessWidget {
                     height: 20,
                   ),
                   settingItem((){
-
+                      Navigator.pushNamed(context, "/myPosts");
                   }, "My Profile", "See my posts", Icon(Icons.arrow_forward)),
                   const SizedBox(
                     height: 20,

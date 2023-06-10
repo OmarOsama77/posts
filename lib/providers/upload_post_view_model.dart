@@ -52,6 +52,7 @@ PostsViewModel postsViewModel = PostsViewModel();
             imageUrl: imageUrl,
             comments: comment,
             userImage: userImage,
+          postId:  user!.userId.toString(),
         )
     );
 

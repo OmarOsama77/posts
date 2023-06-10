@@ -25,8 +25,10 @@ class ApiService{
 
   Future<void> uploadPost({Post? post})async {
     var bodyR = post?.toMap();
-    final url = Uri.https("${ApiConstants.BaseUrl}", "/Posts.json");
-    final response = await http.post(url,
+    var key = "${post!.postId}-${post.title}";
+    print('user id ${post!.postId.toString()}');
+    final url = Uri.https("${ApiConstants.BaseUrl}", "/Posts/$key.json");
+    final response = await http.put(url,
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(bodyR)
     );
@@ -41,6 +43,7 @@ class ApiService{
     );
 print("Hello ${response.statusCode}");
     }
+
 
 
     void updataUserData(String fieldToBeUpdated,String userId,String update)async{
@@ -69,27 +72,36 @@ print("Hello ${response.statusCode}");
         return allComments;
       }catch(e){
           return [];
-        print('Error in comments ');
+
     }
 
     }
 
     List<Post> allPosts=[];
-    Future<List<Post>> getPosts ()async{
+    Future<List<Post>?> getPosts ()async{
      try{
-       final url = Uri.https("${ApiConstants.BaseUrl}","/Posts.json");
+       final url = Uri.https(ApiConstants.BaseUrl,"/Posts.json");
        final response =await http.get(url);
-       final Map<String,dynamic> posts = jsonDecode(response.body);
+       print('status code ${response.statusCode}');
+      final Map<String,dynamic> posts = jsonDecode(response.body);
        allPosts.clear();
        posts.forEach((key, value) {
+        final post = Post(
+            postId: value["userId"],
+            userName: value["username"],
+            title: value["title"],
+            imageUrl: value["imageUrl"],
+            comments:[],
+            userImage: value["userImage"],
 
-        final post = Post(id: key,userName: value["username"], title: value["title"], imageUrl: value["imageUrl"], comments:[],userImage: value["userImage"]);
+        );
          allPosts.add(post);
        });
        print("Retrived ${allPosts.length} posts");
        return allPosts;
      }catch(e){
-       print("Error $e");
+       print("Error in posts $e");
+       return allPosts;
      }
      return [];
     }
@@ -114,17 +126,21 @@ print("Hello ${response.statusCode}");
     return [];
    }
 
-
+    List<Post> userPost=[];
+    Future<List<Post>> getUserPosts(String userId)async{
+      final url = Uri.https("${ApiConstants.BaseUrl}","/Posts/$userId.json");
+      final response = await http.get(url);
+      print('res body ${response.body}');
+    return userPost;
+    }
 
 
 
     void deleteUserData(String userId)async{
-
     final response =await http.delete(Uri.parse("https://${ApiConstants.BaseUrl}/users/$userId.json"));
       print('Delete user data ${response.statusCode}');
-
-
-
     }
+
+
 
 }

@@ -44,9 +44,9 @@ class Home extends StatelessWidget {
               ),
                // viewModel.fetchPosts();
              Consumer<PostsViewModel>(builder:(_,viewModel,__){
-               if(viewModel.posts.length==0){
-                 return CircularProgressIndicator();
-               }
+                if(viewModel.posts.length==0){
+                  return CircularProgressIndicator();
+                }
                 return  ListView.builder(
                    shrinkWrap: true,
                    physics: const NeverScrollableScrollPhysics(),
@@ -57,7 +57,7 @@ class Home extends StatelessWidget {
                        image: viewModel.posts[index].imageUrl,
                        userName:viewModel.posts[index].userName,
                        userImage: viewModel.posts[index].userImage,
-                       id: viewModel.posts[index].id.toString(),
+                       id: viewModel.posts[index].postId.toString(),
                      );
                    });
              })
