@@ -12,10 +12,11 @@ class AuthenticationViewModel with ChangeNotifier{
    }
 
    Future <bool> login(String email,String password)async{
-      UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-      if(userCredential!=null){
-        return true;
-      }
+       UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+       if(userCredential!=null){
+         return true;
+       }
+
       return false;
    }
    Future <bool> register(String email,String password,String firstName,String secondName)async{

@@ -30,9 +30,10 @@ AuthenticationViewModel viewModel = AuthenticationViewModel();
       Fluttertoast.showToast(msg: "Try again");
     }
   }
-  void deleteAccount()async{
+  void deleteAccount(BuildContext context)async{
     await viewModel.deleteAccount();
       service.deleteUserData(user!.userId.toString());
+    Navigator.pushReplacementNamed(context, "/login");
   }
 
 

@@ -29,14 +29,20 @@ class LoginViewModel with ChangeNotifier {
         print('User data ${userData!.email}');
         return userData;
         break;
-      }else{
-        throw Exception("Can't find user");
       }
       }
     }
 
   void forgotPass(String email){
     authVM.forgetPass(email);
+  }
+
+
+  bool isLoading = false;
+  void toogleLoading(){
+    isLoading = !isLoading;
+    notifyListeners();
 
   }
+
 }

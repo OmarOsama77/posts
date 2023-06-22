@@ -44,19 +44,31 @@ class UploadPostViewModel with ChangeNotifier{
   }
 
 PostsViewModel postsViewModel = PostsViewModel();
-  void sendPost (String userName,String title,String imageUrl,List<Comment> comment,String userImage)  {
-    service.uploadPost(
+  int statusCode=0;
+  Future<int> sendPost (String userName,String title,String imageUrl,List<Comment> comment,String userImage,String userId) async {
+   await service.uploadPost(
         post: Post(
             userName: userName,
             title: title,
             imageUrl: imageUrl,
             comments: comment,
             userImage: userImage,
-          postId:  user!.userId.toString(),
+            userId: userId
         )
     );
 
+      statusCode = service.uploadPostStat;
+      notifyListeners();
+   return statusCode;
+  }
 
-
+  bool isLoading=false;
+    void toggleLoadingT(){
+      isLoading=true;
+      notifyListeners();
+    }
+  void toggleLoadingF(){
+    isLoading=false;
+    notifyListeners();
   }
 }

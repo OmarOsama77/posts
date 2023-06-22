@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:posts/widgets/delete_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/authentication_view_model.dart';
@@ -52,7 +53,7 @@ class Setting extends StatelessWidget {
         ));
   }
 
-  Widget settingItem(onPreased(), String t1, String t2, Icon icon) {
+  Widget settingItem(onPreased(), String t1, String t2,Icon icon) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -74,6 +75,9 @@ class Setting extends StatelessWidget {
       ],
     );
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -178,42 +182,28 @@ class Setting extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  settingItem(() {
-                    showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text("Delete account"),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Text(
-                                  "Are you sure you want to delete your account"),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text("Cancel")),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      viewModel.deleteAccount();
+                
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Delete Account!",style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text("delete your account")
 
-                                      Navigator.pushReplacementNamed(context, "/login");
-                                    },
-                                    child: const Text("Yes"),
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.red),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ));
-                  }, "Delete account !", "Delete your account ",
-                      const Icon(Icons.delete)),
+                        ],
+                      ),
+                      DeleteDialog(
+                        "Delete account",
+                        "Are you sure you want to delete your account",
+                            (){
+                            viewModel.deleteAccount(context);
+                        },
+                      )
+
+                    ],
+
+                  )
+             
                 ],
               ),
             ),

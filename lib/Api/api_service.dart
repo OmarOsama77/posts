@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:http/http.dart'as http;
 import 'package:posts/Api/api_constants.dart';
 import 'package:posts/models/commets.dart';
@@ -8,7 +6,7 @@ import 'dart:convert';
 import 'package:posts/models/user.dart';
 
 class ApiService{
-
+    int registerStatusCode=0;
     Future<void> register({required User user})async{
     var bodyR = user?.toMap();
     final url = Uri.https("${ApiConstants.BaseUrl}","/users/.json");
@@ -17,23 +15,24 @@ class ApiService{
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(bodyR)
     );
+    registerStatusCode = response.statusCode;
     print('status code  =  ${response.statusCode}');
 
   }
 
 
-
+int uploadPostStat=0;
   Future<void> uploadPost({Post? post})async {
     var bodyR = post?.toMap();
-    var key = "${post!.postId}-${post.title}";
-    print('user id ${post!.postId.toString()}');
-    final url = Uri.https("${ApiConstants.BaseUrl}", "/Posts/$key.json");
-    final response = await http.put(url,
+
+    final url = Uri.https("${ApiConstants.BaseUrl}", "/Posts.json");
+    final response = await http.post(url,
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(bodyR)
     );
     print("Post response status code ${response.statusCode}");
-
+    uploadPostStat = response.statusCode;
+    print('sda2d ${uploadPostStat}');
   }
 
   Future<void> uploadComment(String postId,Comment comment)async{
@@ -87,13 +86,13 @@ print("Hello ${response.statusCode}");
        allPosts.clear();
        posts.forEach((key, value) {
         final post = Post(
-            postId: value["userId"],
+            postId: key,
             userName: value["username"],
             title: value["title"],
             imageUrl: value["imageUrl"],
             comments:[],
             userImage: value["userImage"],
-
+            userId: value["userId"]
         );
          allPosts.add(post);
        });
@@ -126,13 +125,7 @@ print("Hello ${response.statusCode}");
     return [];
    }
 
-    List<Post> userPost=[];
-    Future<List<Post>> getUserPosts(String userId)async{
-      final url = Uri.https("${ApiConstants.BaseUrl}","/Posts/$userId.json");
-      final response = await http.get(url);
-      print('res body ${response.body}');
-    return userPost;
-    }
+
 
 
 
@@ -140,7 +133,12 @@ print("Hello ${response.statusCode}");
     final response =await http.delete(Uri.parse("https://${ApiConstants.BaseUrl}/users/$userId.json"));
       print('Delete user data ${response.statusCode}');
     }
-
-
+int deletePostStatue=0;
+  Future<int> deletePost(String postId)async{
+      final respnse = await http.delete(Uri.parse("https://${ApiConstants.BaseUrl}/Posts/$postId.json"));
+      print('delete post response = ${respnse.statusCode}');
+      deletePostStatue = respnse.statusCode;
+      return respnse.statusCode;
+  }
 
 }

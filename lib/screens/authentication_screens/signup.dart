@@ -1,12 +1,7 @@
-import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:posts/Api/api_service.dart';
-import 'package:posts/models/user.dart';
 import 'package:provider/provider.dart';
-
 import '../../providers/authentication_view_model.dart';
 import '../../providers/signup_view_model.dart';
 
@@ -127,18 +122,27 @@ class Signup extends StatelessWidget {
                         builder: (_, viewModel, __) {
                           return ElevatedButton(
                             onPressed: ()async {
-
-                             if(myKey.currentState!.validate()&&viewModel.isThereImage()&&viewModel.validation(password.text.trim(), confirmPass.text.trim())){
-                                if(await authViewModel.register(email.text.trim(), password.text.trim(), firstName.text.trim(), secondName.text.trim())){
-                                  Fluttertoast.showToast(msg: "Account created succesfully");
-                                  viewModel.uploadUserImage();
-                                  viewModel.uploadUserData(firstName.text.trim(), secondName.text.trim(), email.text.trim(), viewModel.userImage.toString());
-                                }
-                             }else{
-                               Fluttertoast.showToast(msg: "Please try again");
+                             try{
+                               if(myKey.currentState!.validate()&&viewModel.isThereImage()&&viewModel.validation(password.text.trim(), confirmPass.text.trim())){
+                                   viewModel.loadingT();
+                                 if(await authViewModel.register(email.text.trim(), password.text.trim(), firstName.text.trim(), secondName.text.trim())){
+                                   viewModel.uploadUserImage();
+                                   viewModel.uploadUserData(firstName.text.trim(), secondName.text.trim(), email.text.trim(), viewModel.userImage.toString());
+                                  if(viewModel.signUpRes==200){
+                                    viewModel.isLoading = false;
+                                    Fluttertoast.showToast(msg: "Account created successfully login to continue");
+                                  }else{
+                                    viewModel.loadingF();
+                                  }
+                                 }else{
+                                   viewModel.loadingF();
+                                 }
+                               }
+                             }catch(e){
+                               Fluttertoast.showToast(msg: e.toString());
                              }
                             },
-                            child: const Text("Register"),
+                            child:viewModel.isLoading?CircularProgressIndicator(color: Colors.white,):const Text("Register"),
                             style: ButtonStyle(
                                 shape: MaterialStateProperty.all(
                                     RoundedRectangleBorder(

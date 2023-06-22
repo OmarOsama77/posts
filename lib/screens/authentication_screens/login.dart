@@ -9,6 +9,7 @@ import 'package:posts/providers/login_view_model.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatelessWidget {
+
   Login({super.key});
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -118,16 +119,19 @@ class Login extends StatelessWidget {
                      return ElevatedButton(
                        onPressed: () async{
                          if(myKey.currentState!.validate()){
-                           if(await authViewModel.login(email.text.trim(), password.text.trim())){
-                             await viewModel.findUserByEmail(email.text.trim());
-                             Navigator.pushReplacementNamed(context, "/bottom_navigation_bar");
-
+                           try{
+                             if(await authViewModel.login(email.text.trim(), password.text.trim())){
+                               viewModel.toogleLoading();
+                               await viewModel.findUserByEmail(email.text.trim());
+                               Navigator.pushReplacementNamed(context, "/bottom_navigation_bar");
+                               viewModel.toogleLoading();
+                             }
+                           }catch(e){
+                             Fluttertoast.showToast(msg: e.toString());
                            }
-                         }else{
-                           Fluttertoast.showToast(msg: "Error");
                          }
                        },
-                       child: const Text("Login"),
+                       child:viewModel.isLoading?CircularProgressIndicator(color: Colors.white,): const Text("Login"),
                        style: ButtonStyle(
                            shape: MaterialStateProperty.all(
                                RoundedRectangleBorder(

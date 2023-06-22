@@ -65,7 +65,7 @@ class AddPost extends StatelessWidget {
                                 width: 280,
                                 height: 220,
                                 // color: Color.fromRGBO(200, 200, 200, 1.0),
-                                child: Center(child: Text("Click here to  Upload Image"),),
+                                child: Center(child: Text("Click here to Upload Image"),),
                                 decoration: BoxDecoration(
 
                                 ),
@@ -93,16 +93,23 @@ class AddPost extends StatelessWidget {
                         width: 350,
                         child: ElevatedButton(
                           onPressed: ()async {
-                            print("omar  ${viewModel.user!.imageUrl}" );
                               if(viewModel.isThereImage()){
+                                viewModel.toggleLoadingT();
                                 viewModel.uploadPostImage();
-                                  viewModel.sendPost("${viewModel.user!.firstName} ${viewModel.user!.secondName}", title.text, viewModel.postImage.toString(), [] , viewModel.user!.imageUrl);
-                                  Fluttertoast.showToast(msg: "Post uploaded");
+                                  await viewModel.sendPost("${viewModel.user!.firstName} ${viewModel.user!.secondName}", title.text, viewModel.postImage.toString(), [] , viewModel.user!.imageUrl , viewModel.user!.userId.toString());
+                                  if(viewModel.statusCode==200){
+                                  Fluttertoast.showToast(msg: "Poast Uploaded Succesfully");
+                                  viewModel.toggleLoadingF();
+                                }else{
+                                  Fluttertoast.showToast(msg: "Please try again");
+                                  viewModel.toggleLoadingF();
+                                }
                               }else{
                                 Fluttertoast.showToast(msg: "Please try again");
+                                viewModel.toggleLoadingF();
                               }
                           },
-                          child: const  Text("Post"),
+                          child:viewModel.isLoading?CircularProgressIndicator(color: Colors.white,):const Text("Post"),
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(

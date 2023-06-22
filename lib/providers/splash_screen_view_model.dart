@@ -22,9 +22,12 @@ class SplashViewModel with ChangeNotifier {
     });
   }
   void nav2(BuildContext context) {
+
     Timer(Duration(seconds: 4), () {
       Navigator.pushReplacementNamed(context, "/login");
     });
+
+
   }
 
   LoginViewModel loginViewModel = LoginViewModel();
