@@ -129,8 +129,8 @@ class Signup extends StatelessWidget {
                                    viewModel.uploadUserImage();
                                    viewModel.uploadUserData(firstName.text.trim(), secondName.text.trim(), email.text.trim(), viewModel.userImage.toString());
                                   if(viewModel.signUpRes==200){
-                                    viewModel.isLoading = false;
                                     Fluttertoast.showToast(msg: "Account created successfully login to continue");
+                                    viewModel.isLoading = false;
                                   }else{
                                     viewModel.loadingF();
                                   }

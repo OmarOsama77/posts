@@ -77,7 +77,7 @@ print("Hello ${response.statusCode}");
     }
 
     List<Post> allPosts=[];
-    Future<List<Post>?> getPosts ()async{
+    Future<List<Post?>?> getPosts ()async{
      try{
        final url = Uri.https(ApiConstants.BaseUrl,"/Posts.json");
        final response =await http.get(url);
@@ -97,13 +97,20 @@ print("Hello ${response.statusCode}");
          allPosts.add(post);
        });
        print("Retrived ${allPosts.length} posts");
+
+
        return allPosts;
      }catch(e){
        print("Error in posts $e");
-       return allPosts;
+       return null;
      }
-     return [];
+
     }
+
+
+
+
+
 
     List<User> usersInfo= [];
     Future<List<User>> getUserData()async{
@@ -127,12 +134,26 @@ print("Hello ${response.statusCode}");
 
 
 
-
+   void deletedUserPosts(String userId)async {
+    await getPosts();
+    for (int i=0;i<allPosts.length;i++){
+        if(userId==allPosts[i].userId){
+          final response =await http.delete(Uri.parse("https://${ApiConstants.BaseUrl}/Posts/${allPosts[i].postId}.json"));
+          print('Post dElete ${response.statusCode}');
+      }
+      }
+    }
 
     void deleteUserData(String userId)async{
     final response =await http.delete(Uri.parse("https://${ApiConstants.BaseUrl}/users/$userId.json"));
       print('Delete user data ${response.statusCode}');
     }
+
+
+
+
+
+
 int deletePostStatue=0;
   Future<int> deletePost(String postId)async{
       final respnse = await http.delete(Uri.parse("https://${ApiConstants.BaseUrl}/Posts/$postId.json"));
@@ -140,5 +161,9 @@ int deletePostStatue=0;
       deletePostStatue = respnse.statusCode;
       return respnse.statusCode;
   }
+
+
+
+
 
 }

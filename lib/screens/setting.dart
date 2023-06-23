@@ -197,6 +197,7 @@ class Setting extends StatelessWidget {
                         "Are you sure you want to delete your account",
                             (){
                             viewModel.deleteAccount(context);
+                            viewModel.deleteUserPosts(viewModel.user!.userId.toString());
                         },
                       )
 

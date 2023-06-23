@@ -4,6 +4,7 @@ import 'package:posts/screens/home.dart';
 import 'package:posts/widgets/post_item.dart';
  import 'package:provider/provider.dart';
 
+import '../widgets/home_shimmer.dart';
 import '../widgets/my_post_item.dart';
 
 class MyPosts extends StatelessWidget {
@@ -44,7 +45,7 @@ class MyPosts extends StatelessWidget {
                 future: viewModel.findUserPosts(viewModel.userData!.userId.toString()),
                 builder:(context,snapshoot){
                 if(snapshoot.connectionState == ConnectionState.waiting){
-                  return CircularProgressIndicator();
+                  return HomeShimmer();
                 }  else  if(snapshoot.hasData){
                   return   ListView.builder(
                       shrinkWrap: true,
@@ -60,7 +61,7 @@ class MyPosts extends StatelessWidget {
                         );
                       });
                 }else{
-                  return Center(child: Text("data"),);
+                      return Center(child: Text("No Posts Uploaded yet"),);
                 }
             })
             ],

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:posts/Api/api_service.dart';
 import 'package:uuid/uuid.dart';
 import '../models/commets.dart';
@@ -27,7 +28,6 @@ class CommentsViewModel with ChangeNotifier{
       final retrievedComments = await service.getComments(postId);
       comments = retrievedComments;
       notifyListeners();
-      print('sd ${comments.length}');
 
        return comments;
   }

@@ -25,6 +25,7 @@ PostItem({
   required this.id});
   @override
   Widget build(BuildContext context) {
+
         return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20,bottom: 25),
       child: Container(

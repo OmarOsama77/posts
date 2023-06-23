@@ -37,4 +37,9 @@ AuthenticationViewModel viewModel = AuthenticationViewModel();
   }
 
 
+  void deleteUserPosts(String userId) {
+       service.deletedUserPosts(userId);
+  }
+
+
 }
