@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:posts/Api/api_service.dart';
 import 'package:posts/models/user.dart';
+import 'package:posts/providers/comments_view_model.dart';
 import 'package:posts/providers/home_view_model.dart';
 import 'package:posts/providers/login_view_model.dart';
 import 'package:posts/providers/my_posts_view_model.dart';
@@ -20,6 +21,7 @@ class SplashScreen extends StatelessWidget {
     var data2 = Provider.of<SettingViewModel>(context, listen: false);
     var data3 = Provider.of<UploadPostViewModel>(context, listen: false);
     var data4 = Provider.of<MyPostsViewModel>(context, listen: false);
+    var data5 = Provider.of<CommentsViewModel>(context, listen: false);
     var viewModel = Provider.of<SplashViewModel>(context, listen: true);
 
     return Scaffold(
@@ -29,6 +31,7 @@ class SplashScreen extends StatelessWidget {
               data2.user = viewModel.userData;
               data3.user = viewModel.userData;
               data4.userData = viewModel.userData;
+              data5.user = viewModel.userData;
             }),
             builder: (context, snaphoot) {
               if (snaphoot.hasData) {
