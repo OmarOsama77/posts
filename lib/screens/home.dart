@@ -10,13 +10,17 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
  var data = Provider.of<PostsViewModel>(context,listen: false);
- data.fetchPosts();
+ var data2 = Provider.of<HomeViewModel>(context,listen: false);
+ print('usewwwwwwr ${data2.user}');
+    data.fetchPosts();
     return Scaffold(
       body:
       RefreshIndicator(
+        color: Colors.black,
         onRefresh: ()=>data.fetchPosts(),
         child: SafeArea(
           child: SingleChildScrollView(
+            physics: const  AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
                 Padding(
@@ -30,6 +34,7 @@ class Home extends StatelessWidget {
                             TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                       ),
                       Consumer<HomeViewModel>(builder: (_, viewModel, __) {
+
                         return Text(
                             "${viewModel.user!.firstName.toString()} ${viewModel.user!.secondName.toString()}");
                       })
@@ -48,7 +53,7 @@ class Home extends StatelessWidget {
 
                   return  ListView.builder(
                      shrinkWrap: true,
-                     physics: const NeverScrollableScrollPhysics(),
+                     physics:  const NeverScrollableScrollPhysics(),
                      itemCount: viewModel.posts.length,
                      itemBuilder: (ctx, index) {
                        return PostItem(

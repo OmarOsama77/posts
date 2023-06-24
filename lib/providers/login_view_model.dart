@@ -28,7 +28,7 @@ class LoginViewModel with ChangeNotifier {
       notifyListeners();
         print('User data ${userData!.email}');
         return userData;
-        break;
+
       }
       }
     }

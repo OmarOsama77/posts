@@ -1,9 +1,9 @@
 import 'dart:async';
-import '../models/user.dart'as Userr;
+import '../models/user.dart' as user;
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:posts/Api/api_service.dart';
-import 'package:posts/providers/login_view_model.dart';
+
 
 class SplashViewModel with ChangeNotifier {
 
@@ -11,38 +11,52 @@ class SplashViewModel with ChangeNotifier {
   ApiService service = ApiService();
 
 
-
   User? get currentUser {
     return firebaseAuth.currentUser;
   }
 
-  void nav(BuildContext context) {
-    Timer(Duration(seconds: 4), () {
-      Navigator.pushReplacementNamed(context, "/bottom_navigation_bar");
-    });
-  }
   void nav2(BuildContext context) {
-
     Timer(Duration(seconds: 4), () {
       Navigator.pushReplacementNamed(context, "/login");
     });
-
-
   }
 
-  LoginViewModel loginViewModel = LoginViewModel();
+  user.User? userData;
+  Future<user.User?> findUserByEmail(String uEmail) async {
+    service.usersInfo.clear();
+    await service.getUserData();
+    for (int i = 0; i < service.usersInfo.length; i++) {
+      if (uEmail == service.usersInfo[i].email) {
+        userData = user.User(
+            userId: service.usersInfo[i].userId,
+            firstName: service.usersInfo[i].firstName,
+            secondName: service.usersInfo[i].secondName,
+            email: service.usersInfo[i].email,
+            imageUrl: service.usersInfo[i].imageUrl) ;
 
-   // Future<bool> autoLogin()async{
-   //   if(currentUser!=null){
-   //     try{
-   //       await loginViewModel.findUserByEmail(currentUser!.email.toString());
-   //       return true;
-   //     }catch(e){
-   //       return false;
-   //     }
-   //   }else{
-   //     return false;
-   //   }
-   // }
+        notifyListeners();
+        print('User data ${userData!.email}');
+        return userData;
+      }
+    }
+  }
+
+
+
+
+
+ Future<bool> autoLogin(BuildContext context,VoidCallback onSuccess )async{
+    if(currentUser!=null){
+      var user =await findUserByEmail(currentUser!.email.toString());
+         if(user!=null){
+            onSuccess();
+             return true;
+         }
+    }else{
+
+      return false;
+    }
+    return false;
+ }
 
 }

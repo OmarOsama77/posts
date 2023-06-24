@@ -23,12 +23,9 @@ class Comments extends StatelessWidget {
 
     return Scaffold(
       body: RefreshIndicator(
+        color: Colors.black,
         onRefresh:()=>viewModel.fetchComments(postId),
         child:
-
-
-
-
         Padding(
           padding: EdgeInsets.only(top: 50),
           child: Container(
@@ -81,15 +78,21 @@ class Comments extends StatelessWidget {
                                      crossAxisAlignment: CrossAxisAlignment
                                          .start,
                                      children: [
-                                       Text(
-                                         viewModel.comments[index]!.userName
-                                             .toString(),
-                                         style: TextStyle(fontSize: 15),
+                                       Container(
+                                         width:250,
+                                         child: Text(
+                                           viewModel.comments[index]!.userName
+                                               .toString(),
+                                           style: TextStyle(fontSize: 15),
+                                         ),
                                        ),
-                                       Text(
-                                         viewModel.comments[index]!.title
-                                             .toString(),
-                                         style: TextStyle(fontSize: 15),
+                                       Container(
+                                         width:250,
+                                         child: Text(
+                                           viewModel.comments[index]!.title
+                                               .toString(),
+                                           style: TextStyle(fontSize: 15),
+                                         ),
                                        ),
                                      ],
                                    ),

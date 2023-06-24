@@ -12,10 +12,7 @@ class PostsViewModel with ChangeNotifier{
     posts.clear();
     await apiService.getPosts();
     posts = apiService.allPosts;
-    print('post lenght${apiService.allPosts.length}');
     notifyListeners();
-    print("object ${posts[0].title}");
-    print("object ${posts[0].postId}");
    return posts;
   }
 

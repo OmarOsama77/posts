@@ -84,6 +84,10 @@ print("Hello ${response.statusCode}");
        print('status code ${response.statusCode}');
       final Map<String,dynamic> posts = jsonDecode(response.body);
        allPosts.clear();
+      if(posts.length==0){
+         print('In posts Equal 0');
+         return allPosts;
+      }
        posts.forEach((key, value) {
         final post = Post(
             postId: key,
@@ -96,13 +100,10 @@ print("Hello ${response.statusCode}");
         );
          allPosts.add(post);
        });
-       print("Retrived ${allPosts.length} posts");
-
-
        return allPosts;
      }catch(e){
        print("Error in posts $e");
-       return null;
+       return allPosts;
      }
 
     }
