@@ -4,6 +4,7 @@ import 'package:posts/Api/api_service.dart';
 import 'package:posts/models/user.dart';
 import 'package:posts/providers/home_view_model.dart';
 import 'package:posts/providers/login_view_model.dart';
+import 'package:posts/providers/my_posts_view_model.dart';
 import 'package:posts/providers/posts_view_model.dart';
 import 'package:posts/providers/settings_provider.dart';
 import 'package:posts/providers/upload_post_view_model.dart';
@@ -18,6 +19,7 @@ class SplashScreen extends StatelessWidget {
     var data = Provider.of<HomeViewModel>(context, listen: false);
     var data2 = Provider.of<SettingViewModel>(context, listen: false);
     var data3 = Provider.of<UploadPostViewModel>(context, listen: false);
+    var data4 = Provider.of<MyPostsViewModel>(context, listen: false);
     var viewModel = Provider.of<SplashViewModel>(context, listen: true);
 
     return Scaffold(
@@ -26,10 +28,9 @@ class SplashScreen extends StatelessWidget {
               data.user = viewModel.userData;
               data2.user = viewModel.userData;
               data3.user = viewModel.userData;
+              data4.userData = viewModel.userData;
             }),
             builder: (context, snaphoot) {
-              print("snaps shoot ${snaphoot.data}");
-              print("connection state ${snaphoot.connectionState}");
               if (snaphoot.hasData) {
                   if (snaphoot.data as bool) {
                     Future.delayed(Duration.zero,(){

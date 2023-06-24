@@ -133,9 +133,11 @@ class Signup extends StatelessWidget {
                                     viewModel.isLoading = false;
                                   }else{
                                     viewModel.loadingF();
+                                    Fluttertoast.showToast(msg: "Try again 1");
                                   }
                                  }else{
                                    viewModel.loadingF();
+                                   Fluttertoast.showToast(msg: "Try again 2");
                                  }
                                }
                              }catch(e){
