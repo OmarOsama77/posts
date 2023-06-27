@@ -10,8 +10,6 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
  var data = Provider.of<PostsViewModel>(context,listen: false);
- var data2 = Provider.of<HomeViewModel>(context,listen: false);
- print('usewwwwwwr ${data2.user}');
     data.fetchPosts();
     return Scaffold(
       body:

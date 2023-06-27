@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:posts/models/post.dart';
+
 import '../models/user.dart' as user;
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -58,5 +60,18 @@ class SplashViewModel with ChangeNotifier {
     }
     return false;
  }
+
+
+
+  List<Post> posts=[];
+  Future<List<Post>> fetchPosts()async{
+    posts.clear();
+    await service.getPosts();
+    posts = service.allPosts;
+    notifyListeners();
+    return posts;
+  }
+
+
 
 }

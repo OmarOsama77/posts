@@ -130,7 +130,7 @@ class Comments extends StatelessWidget {
                             title.clear();
                             Fluttertoast.showToast(msg: "Please Refresh to see your comment");
                           },
-                          icon: Icon(Icons.send),
+                            icon:Image.asset("assets/sendComment.png",width: 30,)
                         );
                       }),
                     ],

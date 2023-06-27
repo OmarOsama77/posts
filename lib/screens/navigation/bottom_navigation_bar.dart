@@ -20,7 +20,7 @@ final data = Provider.of<NavigationProvider>(context);
           },
           items: [
               BottomNavigationBarItem(icon:Icon(Icons.home),label: "Home"),
-              BottomNavigationBarItem(icon:Icon(Icons.add),label: "Post"),
+              BottomNavigationBarItem(icon:Image.asset("assets/addPostIcon.png",width: 25,),label: "Post"),
               BottomNavigationBarItem(icon:Icon(Icons.settings),label: "Settings"),
           ]),
     );
