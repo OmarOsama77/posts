@@ -23,11 +23,10 @@ class SplashScreen extends StatelessWidget {
     var data4 = Provider.of<MyPostsViewModel>(context, listen: false);
     var data5 = Provider.of<CommentsViewModel>(context, listen: false);
     var viewModel = Provider.of<SplashViewModel>(context, listen: true);
-
     return Scaffold(
         body: FutureBuilder(
             future: viewModel.autoLogin(context, () {
-              data.user = viewModel.userData;
+              data.user = viewModel.userData!;
               data2.user = viewModel.userData;
               data3.user = viewModel.userData;
               data4.userData = viewModel.userData;

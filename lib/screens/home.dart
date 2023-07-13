@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:posts/providers/user_view_model.dart';
 import 'package:posts/widgets/home_shimmer.dart';
-import 'package:shimmer/shimmer.dart';
+
 import 'package:posts/providers/home_view_model.dart';
 import 'package:posts/providers/posts_view_model.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
  var data = Provider.of<PostsViewModel>(context,listen: false);
+ var userVM = Provider.of<UserViewModel>(context,listen: false);
+
     data.fetchPosts();
+    userVM.getUsers();
     return Scaffold(
       body:
       RefreshIndicator(
@@ -44,20 +48,21 @@ class Home extends StatelessWidget {
                 ),
                  // viewModel.fetchPosts();
                Consumer<PostsViewModel>(builder:(_,viewModel,__){
-
                   if(viewModel.posts.length==0){
                     return HomeShimmer();
                   }
+
 
                   return  ListView.builder(
                      shrinkWrap: true,
                      physics:  const NeverScrollableScrollPhysics(),
                      itemCount: viewModel.posts.length,
                      itemBuilder: (ctx, index) {
-                       return PostItem(
+                        return PostItem(
+                         userId: viewModel.posts[index].userId,
                          title: viewModel.posts[index].title,
                          image: viewModel.posts[index].imageUrl,
-                         userName:viewModel.posts[index].userName,
+                         userName:userVM.users[viewModel.posts[index].userId.toString()].toString(),
                          userImage: viewModel.posts[index].userImage,
                          id: viewModel.posts[index].postId.toString(),
                        );

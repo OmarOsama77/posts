@@ -91,7 +91,6 @@ print("Hello ${response.statusCode}");
        posts.forEach((key, value) {
         final post = Post(
             postId: key,
-            userName: value["username"],
             title: value["title"],
             imageUrl: value["imageUrl"],
             comments:[],
@@ -116,6 +115,7 @@ print("Hello ${response.statusCode}");
     List<User> usersInfo= [];
     Future<List<User>> getUserData()async{
     try{
+      usersInfo.clear();
       final url = Uri.https("${ApiConstants.BaseUrl}","/users.json");
       final response =await http.get(url);
       final Map<String,dynamic> user = jsonDecode(response.body);
@@ -132,6 +132,14 @@ print("Hello ${response.statusCode}");
     }
     return [];
    }
+
+    User? user;
+    Future<void> getUserById(String Id)async{
+      final url = Uri.https("${ApiConstants.BaseUrl}","/users/$Id.json");
+      final response =await http.get(url);
+      print('responseeee =${response.body}');
+  }
+
 
 
 

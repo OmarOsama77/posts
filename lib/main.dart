@@ -12,6 +12,7 @@ import 'package:posts/providers/settings_provider.dart';
 import 'package:posts/providers/signup_view_model.dart';
 import 'package:posts/providers/splash_screen_view_model.dart';
 import 'package:posts/providers/upload_post_view_model.dart';
+import 'package:posts/providers/user_view_model.dart';
 import 'package:posts/screens/comments.dart';
 import 'package:posts/screens/home.dart';
 import 'package:posts/screens/authentication_screens/login.dart';
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<LoginViewModel,MyPostsViewModel>(create: (_)=>MyPostsViewModel(null), update: (context,loginViewModel,myPostsViewModel){
           return MyPostsViewModel(loginViewModel.userData);
         }),
+        ChangeNotifierProvider(create:(_)=>UserViewModel()),
 
 
       ],

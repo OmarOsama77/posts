@@ -37,7 +37,7 @@ class HomeShimmer extends StatelessWidget {
                         ),
                         Container(
                           width: 105,
-                          height: 25,
+                          height: 20,
                           color: Colors.grey,
                         ) // Replace with actual username
                       ],

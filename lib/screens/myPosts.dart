@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:posts/providers/my_posts_view_model.dart';
+import 'package:posts/providers/posts_view_model.dart';
+import 'package:posts/providers/user_view_model.dart';
 import 'package:posts/screens/home.dart';
 import 'package:posts/widgets/post_item.dart';
  import 'package:provider/provider.dart';
@@ -13,6 +15,7 @@ class MyPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var viewModel = Provider.of<MyPostsViewModel>(context);
+    var viewModel2 = Provider.of<UserViewModel>(context);
     return Scaffold(
       body:SafeArea(
         child: SingleChildScrollView(
@@ -55,7 +58,7 @@ class MyPosts extends StatelessWidget {
                         return MyPostItem(
                           title: viewModel.userPosts[index].title,
                           image: viewModel.userPosts[index].imageUrl,
-                          userName:viewModel.userPosts[index].userName,
+                          userName:viewModel2.users[viewModel.userPosts[index].userId].toString(),
                           userImage: viewModel.userPosts[index].userImage,
                           id: viewModel.userPosts[index].postId.toString(),
                         );

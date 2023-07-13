@@ -15,6 +15,7 @@ String title;
 String image;
 String userImage;
 String id;
+String userId;
 
 
 PostItem({
@@ -22,7 +23,9 @@ PostItem({
   required this.title,
   required this.userImage,
   required this.image,
-  required this.id});
+  required this.id,
+  required this.userId
+});
   @override
   Widget build(BuildContext context) {
 
