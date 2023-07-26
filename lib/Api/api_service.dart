@@ -133,12 +133,7 @@ print("Hello ${response.statusCode}");
     return [];
    }
 
-    User? user;
-    Future<void> getUserById(String Id)async{
-      final url = Uri.https("${ApiConstants.BaseUrl}","/users/$Id.json");
-      final response =await http.get(url);
-      print('responseeee =${response.body}');
-  }
+
 
 
 

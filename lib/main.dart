@@ -5,10 +5,12 @@ import 'package:posts/providers/authentication_view_model.dart';
 import 'package:posts/providers/bottom_nav_bar_provider.dart';
 import 'package:posts/providers/comments_view_model.dart';
 import 'package:posts/providers/home_view_model.dart';
+import 'package:posts/providers/likes_view__model.dart';
 import 'package:posts/providers/login_view_model.dart';
 import 'package:posts/providers/my_posts_view_model.dart';
 import 'package:posts/providers/posts_view_model.dart';
 import 'package:posts/providers/settings_provider.dart';
+import 'package:posts/providers/show_others_profile.dart';
 import 'package:posts/providers/signup_view_model.dart';
 import 'package:posts/providers/splash_screen_view_model.dart';
 import 'package:posts/providers/upload_post_view_model.dart';
@@ -20,6 +22,7 @@ import 'package:posts/screens/myPosts.dart';
 import 'package:posts/screens/navigation/bottom_navigation_bar.dart';
 import 'package:posts/screens/authentication_screens/signup.dart';
 import 'package:posts/screens/authentication_screens/splash_screen.dart';
+import 'package:posts/screens/show_others_profile.dart';
 import 'package:posts/widgets/show_image.dart';
 import 'package:provider/provider.dart';
 
@@ -62,7 +65,8 @@ class MyApp extends StatelessWidget {
           return MyPostsViewModel(loginViewModel.userData);
         }),
         ChangeNotifierProvider(create:(_)=>UserViewModel()),
-
+        ChangeNotifierProvider(create:(_)=>ShowOthersProfileVM()),
+        ChangeNotifierProvider(create:(_)=>LikedViewModel()),
 
       ],
       child: MaterialApp(
@@ -75,7 +79,8 @@ class MyApp extends StatelessWidget {
            "/bottom_navigation_bar":(_)=>BottomNavigationScreen(),
           "/comments":(_)=>Comments(),
           "/myPosts":(_)=>MyPosts(),
-          "/showImage":(_)=>ShowImage()
+          "/showImage":(_)=>ShowImage(),
+          "/showOthersProfile":(_)=>ShowOthersProfile()
         },
       ),
     );
