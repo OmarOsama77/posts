@@ -1,13 +1,18 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:posts/providers/my_posts_view_model.dart';
 import 'package:posts/providers/posts_view_model.dart';
 import 'package:posts/providers/user_view_model.dart';
 import 'package:posts/screens/home.dart';
+import 'package:posts/widgets/my_profile.dart';
 import 'package:posts/widgets/post_item.dart';
  import 'package:provider/provider.dart';
 
-import '../widgets/home_shimmer.dart';
+import '../widgets/shimmers/home_shimmer.dart';
 import '../widgets/my_post_item.dart';
+import '../widgets/shimmers/profile_shimmer.dart';
 
 class MyPosts extends StatelessWidget {
   const MyPosts({Key? key}) : super(key: key);
@@ -15,7 +20,6 @@ class MyPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var viewModel = Provider.of<MyPostsViewModel>(context);
-    var viewModel2 = Provider.of<UserViewModel>(context);
     return Scaffold(
       body:SafeArea(
         child: SingleChildScrollView(
@@ -31,7 +35,7 @@ class MyPosts extends StatelessWidget {
                     }, icon: Icon(Icons.arrow_back)),
                   SizedBox(width: 25,),
                   const  Text(
-                      "My Posts",
+                      "My Profile",
                       style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
@@ -48,21 +52,9 @@ class MyPosts extends StatelessWidget {
                 future: viewModel.findUserPosts(viewModel.userData!.userId.toString()),
                 builder:(context,snapshoot){
                 if(snapshoot.connectionState == ConnectionState.waiting){
-                  return HomeShimmer();
+                  return ProfileShimmer();
                 }  else  if(snapshoot.hasData){
-                  return   ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: viewModel.userPosts.length,
-                      itemBuilder: (ctx, index) {
-                        return MyPostItem(
-                          title: viewModel.userPosts[index].title,
-                          image: viewModel.userPosts[index].imageUrl,
-                          userName:viewModel2.users[viewModel.userPosts[index].userId].toString(),
-                          userImage: viewModel.userPosts[index].userImage,
-                          id: viewModel.userPosts[index].postId.toString(),
-                        );
-                      });
+                  return  MyProfile();
                 }else{
                       return Center(child: Text("No Posts Uploaded yet"),);
                 }

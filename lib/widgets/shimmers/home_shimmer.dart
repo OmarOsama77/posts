@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeShimmer extends StatelessWidget {
-  const HomeShimmer({Key? key}) : super(key: key);
+  int listL;
+
+
+  HomeShimmer({required this.listL});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: 2,
+      itemCount: this.listL,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         return Shimmer.fromColors(
-          baseColor: Colors.grey[500]!, // Adjust base color as needed
-          highlightColor: Colors.grey[100]!, // Adjust highlight color as needed
+            baseColor: Colors.grey[500]!,
+          highlightColor: Colors.grey[100]!,
           child: Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),
             child: Container(

@@ -77,22 +77,30 @@ class Login extends StatelessWidget {
                               prefixIcon: Icon(Icons.email), hintText: "Email"),
                         ),
                         const SizedBox(height: 25,),
-                        TextFormField(
-
-                          validator: (val){
-                            if(val!.isEmpty||val.length<7){
-                              return "Required";
-                            }
-                            return null;
+                        Consumer<LoginViewModel>(
+                          builder: (_, viewModel, __) {
+                            return TextFormField(
+                              validator: (val) {
+                                // Validation logic...
+                              },
+                              controller: password,
+                              obscureText: viewModel.passwordObsecure,
+                              keyboardType: TextInputType.visiblePassword,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.lock),
+                                suffixIcon: IconButton(
+                                  icon: Icon(viewModel.passwordObsecure ? Icons.visibility : Icons.visibility_off),
+                                  onPressed: () {
+                                    viewModel.tooglePassword();
+                                  },
+                                ),
+                                hintText: "Password",
+                              ),
+                            );
                           },
+                        )
 
 
-                          controller: password,
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.lock), hintText: "Password"),
-                        ),
                       ],
                     ),
                   ),

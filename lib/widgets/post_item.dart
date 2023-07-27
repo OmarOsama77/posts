@@ -56,7 +56,7 @@ PostItem({
                     ),
                     onTap: (){
                       if(currentUserId == userId){
-                        Fluttertoast.showToast(msg: "This is your account you can see your posts from setting My profile");
+                        Navigator.pushNamed(context, "/myPosts");
                       }else{
                         Navigator.pushNamed(context, "/showOthersProfile",arguments: {"userId":userId});
                       }
@@ -99,7 +99,10 @@ PostItem({
                children: [
               Consumer<LikedViewModel>(builder:(_,viewModel,__){
                 return   IconButton(onPressed:(){
-                  viewModel.toogleLiked();
+                        viewModel.toogleLiked();
+                        if(viewModel.isLiked==true){
+                           viewModel.addLike(id, userId);
+                        }
                 },
                     icon:viewModel.isLiked==false? Image.asset("assets/like.png",width: 25,):Image.asset("assets/liked.png",width: 25,));
               }),

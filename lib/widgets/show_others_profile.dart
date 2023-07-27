@@ -24,9 +24,19 @@ class ShowOthersProfileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding: EdgeInsets.only(top: 55, left: 15, right: 25),
+      padding: EdgeInsets.only(top: 55,),
       child: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 22),
+            child: Row(
+              children: [
+                IconButton(onPressed:(){
+                  Navigator.pop(context);
+                }, icon: Icon(Icons.arrow_back,size: 30,)),
+              ],
+            ),
+          ),
           Column(crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
@@ -38,18 +48,13 @@ class ShowOthersProfileWidget extends StatelessWidget {
               Text("${firstName} ${secondName}", style: TextStyle(
                   fontSize: 20, fontWeight: FontWeight.bold),),
               SizedBox(height: 10,),
-              Row(mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Memes Point "),
-                  Text("20",
-                    style: TextStyle(color: Colors.red, fontSize: 25),),
-                ],
-              )
+              Text("Memes Points : 10",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600))
             ],
           ),
 
           Expanded(
-            child: ListView.builder(
+            child:
+            ListView.builder(
                 itemCount:userPosts.length,
                 itemBuilder: (ctx, index) {
                   return PostItem(

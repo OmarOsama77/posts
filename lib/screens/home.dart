@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:posts/providers/likes_view__model.dart';
 import 'package:posts/providers/user_view_model.dart';
-import 'package:posts/widgets/home_shimmer.dart';
+import 'package:posts/widgets/shimmers/home_shimmer.dart';
 
 import 'package:posts/providers/home_view_model.dart';
 import 'package:posts/providers/posts_view_model.dart';
@@ -52,7 +52,7 @@ late String currentUserId;
                  // viewModel.fetchPosts();
                Consumer<PostsViewModel>(builder:(_,viewModel,__){
                   if(viewModel.posts.length==0) {
-                    return HomeShimmer();
+                    return HomeShimmer(listL: 2,);
                   }
                   return  ListView.builder(
                      shrinkWrap: true,

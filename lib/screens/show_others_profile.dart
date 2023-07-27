@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:posts/widgets/comments_shimmer.dart';
+import 'package:posts/widgets/shimmers/comments_shimmer.dart';
+import 'package:posts/widgets/shimmers/others_shimmer.dart';
+import 'package:posts/widgets/shimmers/profile_shimmer.dart';
 import 'package:posts/widgets/show_others_profile.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +36,7 @@ class ShowOthersProfile extends StatelessWidget {
                   imageUrl:   viewModel.user.imageUrl,
                   userPosts:  viewModel.userPosts);
             }
-            return CommentsShimmer();
+            return OthersShimmer();
           },)
     );
   }

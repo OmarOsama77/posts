@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:posts/Api/api_service.dart';
-import 'package:posts/Api/api_service.dart';
 import 'package:posts/Api/api_service.dart';
 import 'package:posts/providers/authentication_view_model.dart';
-
-import '../Api/api_service.dart';
 import '../models/user.dart';
 
 class LoginViewModel with ChangeNotifier {
   ApiService service = ApiService();
   AuthenticationViewModel authVM = AuthenticationViewModel();
    User? userData;
-
+  bool passwordObsecure=true;
   Future<User?> findUserByEmail(String uEmail) async {
     service.usersInfo.clear();
     await service.getUserData();
@@ -43,6 +38,10 @@ class LoginViewModel with ChangeNotifier {
     isLoading = !isLoading;
     notifyListeners();
 
+  }
+  void tooglePassword(){
+    passwordObsecure=!passwordObsecure;
+    notifyListeners();
   }
 
 }

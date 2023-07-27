@@ -53,7 +53,8 @@ PostsViewModel postsViewModel = PostsViewModel();
             imageUrl: imageUrl,
             comments: comment,
             userImage: userImage,
-            userId: userId
+            userId: userId,
+
         )
     );
 

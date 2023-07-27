@@ -8,6 +8,7 @@ class Post{
  late String imageUrl;
  List<Comment>? comments;
  late String userImage;
+ List<String>? likes;
 
   Post({
      this.userName,
@@ -17,6 +18,7 @@ class Post{
     required this.userImage,
     required this.userId,
      this.postId,
+      this.likes
   });
 
    Map<String,dynamic>toMap(){
@@ -25,7 +27,8 @@ class Post{
        "imageUrl":imageUrl,
        "comments":comments,
         "userImage":userImage,
-       "userId":userId
+       "userId":userId,
+       "likes":likes
      };
    }
 

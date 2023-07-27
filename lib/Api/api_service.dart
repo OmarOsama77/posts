@@ -4,6 +4,7 @@ import 'package:posts/models/commets.dart';
 import 'package:posts/models/post.dart';
 import 'dart:convert';
 import 'package:posts/models/user.dart';
+import 'package:posts/providers/user_view_model.dart';
 
 class ApiService{
     int registerStatusCode=0;
@@ -32,7 +33,31 @@ int uploadPostStat=0;
     );
     print("Post response status code ${response.statusCode}");
     uploadPostStat = response.statusCode;
-    print('sda2d ${uploadPostStat}');
+
+  }
+
+  List<String> likes=[];
+    Future<void> addLike(String postId,String userId)async{
+      try{
+        final url = Uri.https("${ApiConstants.BaseUrl}", "/Posts/$postId/likes.json");
+        var response =await http.put(url,body: jsonEncode(
+          {
+            userId:true
+          }
+        ));
+        if(response.statusCode==200){
+          print('res ${response}');
+          print('res ${response.statusCode}');
+      }else{
+          print('not done');
+      }
+      }catch(e){
+        print('Error in likes');
+      throw e;
+      }
+
+
+
   }
 
   Future<void> uploadComment(String postId,Comment comment)async{
@@ -95,7 +120,8 @@ print("Hello ${response.statusCode}");
             imageUrl: value["imageUrl"],
             comments:[],
             userImage: value["userImage"],
-            userId: value["userId"]
+            userId: value["userId"],
+
         );
          allPosts.add(post);
        });
