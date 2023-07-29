@@ -4,7 +4,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:posts/Api/api_service.dart';
+import 'package:posts/data/network/api_service.dart';
 import 'package:posts/widgets/shimmers/comments_shimmer.dart';
 import 'package:provider/provider.dart';
 

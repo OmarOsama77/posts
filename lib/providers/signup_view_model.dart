@@ -6,13 +6,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:posts/models/user.dart';
-
-import '../Api/api_service.dart';
+import 'package:posts/data/network/api_service.dart';
 
 class SignupViewModel with ChangeNotifier{
-
   ApiService service  = ApiService();
   SignupViewModel(this.service);
+  bool passwordObsecure=true;
+  bool confirmPasswordObsecure = true;
   bool validation(String password,String confirmPassword){
     if(password==confirmPassword){
       return true;
@@ -61,6 +61,16 @@ int signUpRes=0;
   }
   void loadingF(){
     isLoading = false;
+    notifyListeners();
+  }
+
+
+  void tooglePassword(){
+    passwordObsecure=!passwordObsecure;
+    notifyListeners();
+  }
+  void toogleConfirmPassword(){
+    confirmPasswordObsecure=!confirmPasswordObsecure;
     notifyListeners();
   }
 }

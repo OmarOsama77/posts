@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:posts/Api/api_service.dart';
+import 'package:posts/data/network/api_service.dart';
 import 'package:posts/providers/authentication_view_model.dart';
 import '../models/user.dart';
 

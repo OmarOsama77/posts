@@ -81,7 +81,10 @@ class Login extends StatelessWidget {
                           builder: (_, viewModel, __) {
                             return TextFormField(
                               validator: (val) {
-                                // Validation logic...
+                               if(val!.isEmpty||val.length<5){
+                                return "Required";
+                               }
+                               return null;
                               },
                               controller: password,
                               obscureText: viewModel.passwordObsecure,

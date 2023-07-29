@@ -13,19 +13,7 @@ class Signup extends StatelessWidget {
   TextEditingController password = TextEditingController();
   TextEditingController confirmPass = TextEditingController();
 
-  Widget passwordFormField(TextEditingController controller, String hintText) {
-    return TextFormField(
-      controller: controller,
-      validator: (val) {
-        if (val!.isEmpty || val.length < 2) {
-          return "Required";
-        }
-        return null;
-      },
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(hintText: hintText),
-    );
-  }
+
 
   Widget textFormField(String hintText, TextEditingController controller) {
     return TextFormField(
@@ -43,6 +31,7 @@ class Signup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final myKey = GlobalKey<FormState>();
     AuthenticationViewModel authViewModel = AuthenticationViewModel();
 
@@ -101,11 +90,66 @@ class Signup extends StatelessWidget {
                   SizedBox(
                     height: 25,
                   ),
-                  passwordFormField(password, "Password"),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  passwordFormField(confirmPass, "Confirm Password"),
+                  Consumer<SignupViewModel>(
+                    builder: (__, vm, _) {
+                      return Column(
+                        children: [
+                          TextFormField(
+                            validator: (val) {
+                              if (val!.isEmpty || val.length < 6) {
+                                return "Password must be at least 6 characters";
+                              }
+                              return null;
+                            },
+                            controller: password,
+                            obscureText: vm.passwordObsecure, // Use the viewModel's passwordObsecure variable
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  vm.passwordObsecure
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  vm.tooglePassword(); // Call the corresponding method from the viewModel
+                                },
+                              ),
+                              hintText: "Password",
+                            ),
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          TextFormField(
+                            validator: (val) {
+                              if (val!.isEmpty || val.length < 6) {
+                                return "Password must be at least 6 characters";
+                              }
+                              return null;
+                            },
+                            controller: confirmPass,
+                            obscureText: vm.confirmPasswordObsecure, // Use the viewModel's confirmPasswordObsecure variable
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  vm.confirmPasswordObsecure
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  vm.toogleConfirmPassword(); // Call the corresponding method from the viewModel
+                                },
+                              ),
+                              hintText: "Confirm Password",
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  )
+
                 ],
               ),
               SizedBox(
@@ -123,25 +167,35 @@ class Signup extends StatelessWidget {
                           return ElevatedButton(
                             onPressed: ()async {
                              try{
-                               if(myKey.currentState!.validate()&&viewModel.isThereImage()&&viewModel.validation(password.text.trim(), confirmPass.text.trim())){
-                                   viewModel.loadingT();
-                                 if(await authViewModel.register(email.text.trim(), password.text.trim(), firstName.text.trim(), secondName.text.trim())){
-                                   viewModel.uploadUserImage();
-                                   viewModel.uploadUserData(firstName.text.trim(), secondName.text.trim(), email.text.trim(), viewModel.userImage.toString());
-                                  if(viewModel.signUpRes==200){
-                                    Fluttertoast.showToast(msg: "Account created successfully login to continue");
-                                    viewModel.isLoading = false;
-                                  }else{
-                                    viewModel.loadingF();
-                                    Fluttertoast.showToast(msg: "Try again 1");
-                                  }
-                                 }else{
-                                   viewModel.loadingF();
-                                   Fluttertoast.showToast(msg: "Try again 2");
-                                 }
+                               if(myKey.currentState!.validate()){
+                                    if(viewModel.isThereImage()){
+                                      if(viewModel.validation(password.text.trim(), confirmPass.text.trim())){
+                                        viewModel.loadingT();
+                                        if(await authViewModel.register(email.text.trim(), password.text.trim(), firstName.text.trim(), secondName.text.trim())) {
+                                          viewModel.uploadUserImage();
+                                          viewModel.uploadUserData(
+                                              firstName.text.trim(),
+                                              secondName.text.trim(),
+                                              email.text.trim(),
+                                              viewModel.userImage.toString());
+                                          if (viewModel.signUpRes == 200) {
+                                            Fluttertoast.showToast(
+                                                msg: "Account created successfully login to continue");
+                                            viewModel.isLoading = false;
+                                          }
+                                        }
+                                      }else{
+                                        Fluttertoast.showToast(msg: "Passwords don't match. Try again.");
+                                      }
+                                    }else{
+                                      Fluttertoast.showToast(msg: "Please add image");
+                                    }
+
                                }
                              }catch(e){
-                               Fluttertoast.showToast(msg: e.toString());
+
+                               viewModel.loadingF();
+                                Fluttertoast.showToast(msg: e.toString());
                              }
                             },
                             child:viewModel.isLoading?CircularProgressIndicator(color: Colors.white,):const Text("Register"),

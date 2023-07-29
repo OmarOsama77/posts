@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:posts/Api/api_service.dart';
-import 'package:posts/models/user.dart';
+import 'package:posts/data/network/api_service.dart';
 import 'package:posts/providers/comments_view_model.dart';
 import 'package:posts/providers/home_view_model.dart';
 import 'package:posts/providers/login_view_model.dart';

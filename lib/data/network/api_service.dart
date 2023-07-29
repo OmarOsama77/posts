@@ -1,5 +1,6 @@
 import 'package:http/http.dart'as http;
-import 'package:posts/Api/api_constants.dart';
+
+import 'package:posts/data/network/api_constants.dart';
 import 'package:posts/models/commets.dart';
 import 'package:posts/models/post.dart';
 import 'dart:convert';

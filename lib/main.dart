@@ -1,4 +1,3 @@
- import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:posts/providers/authentication_view_model.dart';
@@ -26,7 +25,7 @@ import 'package:posts/screens/show_others_profile.dart';
 import 'package:posts/widgets/show_image.dart';
 import 'package:provider/provider.dart';
 
-import 'Api/api_service.dart';
+import 'package:posts/data/network/api_service.dart';
 
 Future<void>  main()async {
    WidgetsFlutterBinding.ensureInitialized();

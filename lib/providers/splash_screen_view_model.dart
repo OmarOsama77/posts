@@ -4,7 +4,7 @@ import 'package:posts/models/post.dart';
 import '../models/user.dart' as user;
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:posts/Api/api_service.dart';
+import 'package:posts/data/network/api_service.dart';
 
 
 class SplashViewModel with ChangeNotifier {

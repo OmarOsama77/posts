@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:posts/Api/api_service.dart';
+import 'package:posts/data/network/api_service.dart';
 import 'package:posts/models/user.dart';
 import 'package:posts/providers/authentication_view_model.dart';
 import 'package:posts/providers/login_view_model.dart';

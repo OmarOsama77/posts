@@ -19,13 +19,13 @@ class OthersShimmer extends StatelessWidget {
                   radius: 40,
                   backgroundColor: Colors.grey,
                 ),
-                SizedBox(height: 7,),
+                SizedBox(height: 15,),
                 Container(
                   width: 140,
                   height: 25,
                   color: Colors.grey,
                 ),
-                SizedBox(height: 7,),
+                SizedBox(height: 15,),
                 Container(
                   width: 140,
                   height: 25,

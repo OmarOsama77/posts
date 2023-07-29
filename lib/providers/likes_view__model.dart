@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:posts/Api/api_service.dart';
+import 'package:posts/data/network/api_service.dart';
+
 
 class LikedViewModel with ChangeNotifier{
   ApiService service = ApiService();

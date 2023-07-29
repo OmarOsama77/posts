@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:posts/Api/api_service.dart';
+import 'package:posts/data/network/api_service.dart';
 import 'package:posts/models/commets.dart';
 import 'package:posts/models/post.dart';
 import 'package:posts/models/user.dart';
