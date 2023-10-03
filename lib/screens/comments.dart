@@ -113,7 +113,12 @@ class Comments extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(child: TextField(controller: title)),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.only(left: 10),
+                          child: TextField(controller: title),
+                        ),
+                      ),
                       Consumer<CommentsViewModel>(builder: (_, viewModel, __) {
                         return IconButton(
                           onPressed: () {

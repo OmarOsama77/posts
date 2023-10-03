@@ -91,6 +91,11 @@ flutter:
     - assets/Post It.png
     - assets/like.png
     - assets/liked.png
+    - assets/post choosen.png
+    - assets/home_highlighted.png
+    - assets/home_blank.png
+    - assets/settings_blank.png
+    - assets/settings_high.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -95,22 +95,9 @@ PostItem({
                 ),
               ),
             ),
-             Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-               children: [
-              Consumer<LikedViewModel>(builder:(_,viewModel,__){
-                return   IconButton(onPressed:(){
-                        viewModel.toogleLiked();
-                        if(viewModel.isLiked==true){
-                           viewModel.addLike(id, userId);
-                        }
-                },
-                    icon:viewModel.isLiked==false? Image.asset("assets/like.png",width: 25,):Image.asset("assets/liked.png",width: 25,));
-              }),
-                 TextButton(onPressed: (){
-                   Navigator.pushNamed(context, "/comments",arguments: {"postId":id});
-                 }, child: Text("Comments",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black),)),
-               ],
-             ),
+             TextButton(onPressed: (){
+               Navigator.pushNamed(context, "/comments",arguments: {"postId":id});
+             }, child: Text("Comments",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black),)),
           ],
         ),
       ),

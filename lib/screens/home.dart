@@ -2,26 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:posts/providers/likes_view__model.dart';
 import 'package:posts/providers/user_view_model.dart';
 import 'package:posts/widgets/shimmers/home_shimmer.dart';
-
+import '../models/user.dart';
 import 'package:posts/providers/home_view_model.dart';
 import 'package:posts/providers/posts_view_model.dart';
 import 'package:provider/provider.dart';
 import '../widgets/post_item.dart';
 
 class Home extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
  var data = Provider.of<PostsViewModel>(context,listen: false);
  var userVM = Provider.of<UserViewModel>(context,listen: false);
+ var userObj = Provider.of<HomeViewModel>(context,listen: false);
 late String currentUserId;
-    data.fetchPosts();
-    userVM.getUsers();
+    if(data.dataLoad==false){
+      data.fetchPosts(userObj.user!.userId.toString());
+      userVM.getUsers();
+    }
+
+
 
     return Scaffold(
       body:
       RefreshIndicator(
         color: Colors.black,
-        onRefresh: ()=>data.fetchPosts(),
+        onRefresh: ()=>data.fetchPosts(userObj.user!.userId.toString()),
         child: SafeArea(
           child: SingleChildScrollView(
             physics: const  AlwaysScrollableScrollPhysics(),
@@ -39,7 +45,7 @@ late String currentUserId;
                       ),
                       Consumer<HomeViewModel>(builder: (_, viewModel, __) {
                         currentUserId = viewModel.user!.userId!;
-                        print('cuurrent user ${currentUserId}');
+                        print('current user ${currentUserId}');
                         return Text(
                             "${viewModel.user!.firstName.toString()} ${viewModel.user!.secondName.toString()}");
                       })
@@ -51,7 +57,7 @@ late String currentUserId;
                 ),
                  // viewModel.fetchPosts();
                Consumer<PostsViewModel>(builder:(_,viewModel,__){
-                  if(viewModel.posts.length==0) {
+                  if(viewModel.dataLoad==false) {
                     return HomeShimmer(listL: 2,);
                   }
                   return  ListView.builder(

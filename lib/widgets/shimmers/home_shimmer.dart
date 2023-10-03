@@ -63,11 +63,7 @@ class HomeShimmer extends StatelessWidget {
                   const SizedBox(height: 20),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        width: 45,
-                        height: 25,
-                        color: Colors.grey,
-                      ),
+
                       Container(
                         width: 85,
                         height: 25,

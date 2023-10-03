@@ -23,51 +23,53 @@ class ShowOthersProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: EdgeInsets.only(top: 55,),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 22),
-            child: Row(
+    return  SingleChildScrollView(
+      physics: const  AlwaysScrollableScrollPhysics(),
+      child: Padding(
+        padding: EdgeInsets.only(top: 55,),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 22),
+              child: Row(
+                children: [
+                  IconButton(onPressed:(){
+                    Navigator.pop(context);
+                  }, icon: Icon(Icons.arrow_back,size: 30,)),
+                ],
+              ),
+            ),
+            Column(crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                IconButton(onPressed:(){
-                  Navigator.pop(context);
-                }, icon: Icon(Icons.arrow_back,size: 30,)),
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: MemoryImage(
+                      base64Decode(imageUrl) as Uint8List),
+                ),
+                SizedBox(height: 10,),
+                Text("${firstName} ${secondName}", style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.bold),),
               ],
             ),
-          ),
-          Column(crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 40,
-                backgroundImage: MemoryImage(
-                    base64Decode(imageUrl) as Uint8List),
-              ),
-              SizedBox(height: 10,),
-              Text("${firstName} ${secondName}", style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold),),
-              SizedBox(height: 10,),
-              Text("Memes Points : 10",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600))
-            ],
-          ),
 
-          Expanded(
-            child:
-            ListView.builder(
-                itemCount:userPosts.length,
-                itemBuilder: (ctx, index) {
-                  return PostItem(
-                      userName: userPosts[index]!.userName.toString(),
-                      title: userPosts[index]!.title.toString(),
-                      userImage:  userPosts[index]!.userImage.toString(),
-                      image:   userPosts[index]!.imageUrl.toString(),
-                      id:  userPosts[index]!.postId.toString(),
-                      userId: userId
-                  );
-                }),
-          )
-        ],
+            SizedBox(
+              child: ListView.builder(
+                  shrinkWrap: true,
+                physics:const NeverScrollableScrollPhysics(),
+                  itemCount:userPosts.length,
+                  itemBuilder: (ctx, index) {
+                    return PostItem(
+                        userName: userPosts[index]!.userName.toString(),
+                        title: userPosts[index]!.title.toString(),
+                        userImage:  userPosts[index]!.userImage.toString(),
+                        image:   userPosts[index]!.imageUrl.toString(),
+                        id:  userPosts[index]!.postId.toString(),
+                        userId: userId
+                    );
+                  }),
+            )
+          ],
+        ),
       ),
     );
   }

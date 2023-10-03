@@ -22,12 +22,7 @@ class ProfileShimmer extends StatelessWidget {
                  height: 25,
                  color: Colors.grey,
                ),
-               SizedBox(height: 7,),
-               Container(
-                 width: 140,
-                 height: 25,
-                 color: Colors.grey,
-               )
+
              ],
            ),
           SizedBox(height: 10,),

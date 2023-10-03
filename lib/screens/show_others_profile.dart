@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/show_others_profile.dart';
 
+
 class ShowOthersProfile extends StatelessWidget {
   const ShowOthersProfile({Key? key}) : super(key: key);
 

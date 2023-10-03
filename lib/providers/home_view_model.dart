@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:posts/models/post.dart';
-import 'package:posts/providers/posts_view_model.dart';
+
 import '../models/user.dart';
 
 

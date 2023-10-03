@@ -24,7 +24,7 @@ class MyProfile extends StatelessWidget {
         SizedBox(height: 5,),
         Text("${viewModel.userData!.firstName} ${viewModel.userData!.secondName}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
         SizedBox(height: 10,),
-        Text("Memes Points : 10",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600)),
+       
         SizedBox(height: 40,),
         ListView.builder(
             shrinkWrap: true,

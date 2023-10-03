@@ -5,7 +5,7 @@ import 'package:posts/models/commets.dart';
 import 'package:posts/models/post.dart';
 import 'dart:convert';
 import 'package:posts/models/user.dart';
-import 'package:posts/providers/user_view_model.dart';
+
 
 class ApiService{
     int registerStatusCode=0;
