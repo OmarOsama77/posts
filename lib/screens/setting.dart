@@ -6,6 +6,7 @@ import 'package:posts/widgets/delete_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/authentication_view_model.dart';
+import '../providers/bottom_nav_bar_provider.dart';
 import '../providers/settings_provider.dart';
 
 class Setting extends StatelessWidget {
@@ -83,7 +84,7 @@ class Setting extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController firstName = TextEditingController();
     TextEditingController secondName = TextEditingController();
-
+    var obj = Provider.of<NavigationProvider>(context);
     TextEditingController newPass = TextEditingController();
     TextEditingController confPass = TextEditingController();
    var viewModel = Provider.of<SettingViewModel>(context);
@@ -175,6 +176,7 @@ class Setting extends StatelessWidget {
                     return  settingItem(()async{
                       if(await viewModel.signOut()){
                         Navigator.pushReplacementNamed(context, "/login");
+                        obj.currentIndex = 0;
                       }
                     }, "Logout", "Logout from your account",
                         const Icon(Icons.logout));

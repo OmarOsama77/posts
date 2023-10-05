@@ -74,7 +74,6 @@ class AddPost extends StatelessWidget {
                             child: Container(
                               width: 280,
                               height: 220,
-                              // color: Color.fromRGBO(200, 200, 200, 1.0),
                               child: Center(
                                 child: Text("Click here to Upload Image"),
                               ),
@@ -121,8 +120,10 @@ class AddPost extends StatelessWidget {
                             );
                             if (viewModel.statusCode == 200) {
                               Fluttertoast.showToast(
-                                  msg: "Poast Uploaded Succesfully");
+                                  msg: "Post Uploaded Successfully");
                               viewModel.toggleLoadingF();
+                              viewModel.image = null;
+
                             } else {
                               Fluttertoast.showToast(msg: "Please try again");
                               viewModel.toggleLoadingF();

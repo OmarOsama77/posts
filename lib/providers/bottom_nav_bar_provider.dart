@@ -18,6 +18,7 @@ class NavigationProvider with ChangeNotifier{
       case 2 :  {
         return Setting();
       }
+
     }
     return Home();
   }
@@ -25,6 +26,10 @@ class NavigationProvider with ChangeNotifier{
   set setIndex(int index) {
     this.currentIndex = index;
     notifyListeners();
+  }
+
+  void changeCurrIndex(){
+
   }
 
 
